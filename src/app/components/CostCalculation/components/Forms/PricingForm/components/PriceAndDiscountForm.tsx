@@ -2,7 +2,7 @@ import { CSSProperties, useEffect, useState } from "react";
 import { PriceAndDiscount } from "../PricingForm";
 import { CustomAdornment } from "@/app/components/Shared/CustomAdornment";
 import arePriceAndDiscountEqual from "@/app/helper/arePriceAndDiscountEqual";
-import { Grid, Typography, TextField, Stack } from "@mui/material";
+import { Grid, Typography, TextField } from "@mui/material";
 
 interface PriceAndDiscountFormProps {
   startPriceAndDiscount: PriceAndDiscount;

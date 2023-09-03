@@ -1,11 +1,4 @@
-import {
-  AppBar,
-  Container,
-  Stack,
-  Toolbar,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { AppBar, Stack, Toolbar, Typography, useTheme } from "@mui/material";
 import Logo from "../Logo";
 
 export default function CalculatorAppBar() {

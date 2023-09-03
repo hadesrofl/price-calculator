@@ -1,11 +1,5 @@
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { BottomNavigation, Paper, Typography } from "@mui/material";
 import { useState } from "react";
-import Logo from "../Logo";
 import SoftwareVersion from "../SoftwareVersion";
 
 export default function CalculatorBottomBar() {

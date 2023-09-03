@@ -1,4 +1,4 @@
-import { Typography, TypographyProps, useTheme } from "@mui/material";
+import { Typography, TypographyProps } from "@mui/material";
 
 export default function SoftwareVersion(props: TypographyProps) {
   return (

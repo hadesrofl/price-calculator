@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 import * as bookLogo from "../../../public/book.png";
-import Image, { ImageProps } from "next/image";
+import Image from "next/image";
 
 export default function Logo(props: { style?: CSSProperties }) {
   const { style } = props;
