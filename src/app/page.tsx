@@ -1,5 +1,5 @@
 "use client";
-import { Stack, Divider } from "@mui/material";
+import { Stack, Divider, Box } from "@mui/material";
 import SalesCalculation from "./components/SalesCalculation/SalesCalculation";
 import {
   BookCosts,
@@ -7,6 +7,8 @@ import {
   PriceAndDiscountsPerProductType,
 } from "./components/CostCalculation/CostCalculation";
 import { useState } from "react";
+import CalculatorAppBar from "./components/AppBar/CalculatorAppBar";
+import CalculatorBottomBar from "./components/AppBar/CalculatorBottomBar";
 
 export default function Home() {
   const [costs, setCosts] = useState<BookCosts>({
@@ -31,15 +33,24 @@ export default function Home() {
   };
 
   return (
-    <Stack spacing={2} marginRight="5%">
-      <SalesCalculation bookCosts={costs} priceAndDiscount={priceAndDiscount} />
-      <Divider />
-      <CostCalculation
-        startCosts={costs}
-        startPriceAndDiscount={priceAndDiscount}
-        onCostChanged={onCostChanged}
-        onPriceAndDiscountChanged={onPriceAndDiscountChanged}
-      />
-    </Stack>
+    <Box width="100%">
+      <CalculatorAppBar />
+      <Box component="main" sx={{ paddingTop: 7 }}>
+        <Stack spacing={2} marginRight="5%" marginBottom="5%">
+          <SalesCalculation
+            bookCosts={costs}
+            priceAndDiscount={priceAndDiscount}
+          />
+          <Divider />
+          <CostCalculation
+            startCosts={costs}
+            startPriceAndDiscount={priceAndDiscount}
+            onCostChanged={onCostChanged}
+            onPriceAndDiscountChanged={onPriceAndDiscountChanged}
+          />
+          <CalculatorBottomBar />
+        </Stack>
+      </Box>
+    </Box>
   );
 }
