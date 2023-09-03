@@ -7,6 +7,7 @@ import {
   BookCosts,
   PriceAndDiscountsPerProductType,
 } from "../CostCalculation/CostCalculation";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 export interface SalesCalculationProps {
   bookCosts: BookCosts;

@@ -1,25 +1,22 @@
-import { ProductType } from "@/app/components/SalesCalculation/cards/CalculationCardContent";
+import { CSSProperties, useEffect, useState } from "react";
+import { PriceAndDiscount } from "../PricingForm";
 import { CustomAdornment } from "@/app/components/Shared/CustomAdornment";
 import arePriceAndDiscountEqual from "@/app/helper/arePriceAndDiscountEqual";
-import { Stack, Grid, Typography, TextField, Divider } from "@mui/material";
-import { CSSProperties, useEffect, useState } from "react";
+import { Grid, Typography, TextField, Stack } from "@mui/material";
 
 interface PriceAndDiscountFormProps {
   startPriceAndDiscount: PriceAndDiscount;
   onPriceAndDiscountChange: (priceAndDiscount: PriceAndDiscount) => void;
 }
 
-export type PriceAndDiscount = {
-  pricePerIssue: number;
-  discountPerIssue: number;
-};
-
-function PriceAndDiscountForm(props: PriceAndDiscountFormProps) {
+export default function PriceAndDiscountForm(props: PriceAndDiscountFormProps) {
   const { onPriceAndDiscountChange, startPriceAndDiscount } = props;
 
   const [priceAndDiscount, setPriceAndDiscount] = useState<PriceAndDiscount>(
     startPriceAndDiscount
   );
+  const title = "Preisbildung";
+  const textFieldSx: CSSProperties = { textAlign: "right" };
 
   useEffect(() => {
     if (!arePriceAndDiscountEqual(priceAndDiscount, startPriceAndDiscount))
@@ -32,14 +29,12 @@ function PriceAndDiscountForm(props: PriceAndDiscountFormProps) {
       [event.target.name]: Number.parseInt(event.target.value),
     });
 
-  const textFieldSx: CSSProperties = { textAlign: "right" };
-
   return (
-    <Grid alignItems="center" container spacing={2}>
-      <Grid item xs={6}>
+    <Grid alignItems="center" container rowSpacing={2}>
+      <Grid item xs={12} lg={6}>
         <Typography>Preis/Exemplar</Typography>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} lg={6}>
         <TextField
           size="small"
           variant="filled"
@@ -55,10 +50,10 @@ function PriceAndDiscountForm(props: PriceAndDiscountFormProps) {
           onChange={onInputChange}
         />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} lg={6}>
         <Typography>Händlerrabatt</Typography>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} lg={6}>
         <TextField
           size="small"
           variant="filled"
@@ -75,52 +70,5 @@ function PriceAndDiscountForm(props: PriceAndDiscountFormProps) {
         />
       </Grid>
     </Grid>
-  );
-}
-
-export interface PricingFormProps {
-  digitalStartPriceAndDiscount: PriceAndDiscount;
-  printStartPriceAndDiscount: PriceAndDiscount;
-  onPriceAndDiscountChange: (
-    newPriceAndDiscount: PriceAndDiscount,
-    productType: ProductType
-  ) => void;
-}
-export function PricingForm(props: PricingFormProps) {
-  const {
-    digitalStartPriceAndDiscount,
-    printStartPriceAndDiscount,
-    onPriceAndDiscountChange,
-  } = props;
-
-  const onDigitalPriceAndDiscountChange = (
-    newPriceAndDiscount: PriceAndDiscount
-  ) => {
-    onPriceAndDiscountChange(newPriceAndDiscount, "digital");
-  };
-
-  const onPrintPriceAndDiscountChange = (
-    newPriceAndDiscount: PriceAndDiscount
-  ) => {
-    onPriceAndDiscountChange(newPriceAndDiscount, "print");
-  };
-
-  return (
-    <Stack justifyContent="center" spacing={2}>
-      <Typography variant="h6" textAlign="center">
-        Digital
-      </Typography>
-      <PriceAndDiscountForm
-        onPriceAndDiscountChange={onDigitalPriceAndDiscountChange}
-        startPriceAndDiscount={digitalStartPriceAndDiscount}
-      />
-      <Typography variant="h6" textAlign="center">
-        Druck
-      </Typography>
-      <PriceAndDiscountForm
-        onPriceAndDiscountChange={onPrintPriceAndDiscountChange}
-        startPriceAndDiscount={printStartPriceAndDiscount}
-      />
-    </Stack>
   );
 }

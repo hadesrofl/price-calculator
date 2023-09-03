@@ -12,7 +12,7 @@ import { CalculationCardContent } from "./CalculationCardContent";
 export default function DigitalCalculationCard(props: CalculationCardProps) {
   const { minHeight, bookCosts, priceAndDiscount } = props;
   const theme = useTheme();
-  const isDesktopSize = useMediaQuery(theme.breakpoints.up("sm"));
+  const isDesktopSize = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
     <Card

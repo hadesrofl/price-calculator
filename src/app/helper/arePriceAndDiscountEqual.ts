@@ -1,4 +1,4 @@
-import { PriceAndDiscount } from "../components/CostCalculation/components/forms/PricingForm";
+import { PriceAndDiscount } from "../components/CostCalculation/components/forms/PricingForm/PricingForm";
 
 export default function arePriceAndDiscountEqual(
   priceAndDiscount: PriceAndDiscount,

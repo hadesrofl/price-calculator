@@ -1,4 +1,11 @@
-import { Box, Divider, Tab, Tabs } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Tab,
+  Tabs,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
@@ -7,7 +14,10 @@ import CalculationTabPanel from "./components/CalculationTabPanel";
 import ProductionCostForm, {
   ProductionCost,
 } from "./components/forms/ProductionCostForm";
-import { PriceAndDiscount, PricingForm } from "./components/forms/PricingForm";
+import {
+  PriceAndDiscount,
+  PricingForm,
+} from "./components/forms/PricingForm/PricingForm";
 import PrintCostForm, { PrintCost } from "./components/forms/PrintCostForm";
 import { ProductType } from "../SalesCalculation/cards/CalculationCardContent";
 import areProductCostsEqual from "@/app/helper/areProductCostsEqual";
@@ -44,6 +54,8 @@ export function CostCalculation(props: CostCalculationProps) {
   const [bookCosts, setBookCosts] = useState<BookCosts>(startCosts);
   const [priceAndDiscount, setPriceAndDiscount] =
     useState<PriceAndDiscountsPerProductType>(startPriceAndDiscount);
+  const theme = useTheme();
+  const isDesktopSize = useMediaQuery(theme.breakpoints.up("sm"));
 
   const changeSelectedTab = (_: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
@@ -119,23 +131,40 @@ export function CostCalculation(props: CostCalculationProps) {
       <Tabs
         value={selectedTab}
         onChange={changeSelectedTab}
+        variant="scrollable"
+        scrollButtons="auto"
+        allowScrollButtonsMobile
         aria-label="basic tabs example"
       >
-        <Tab icon={<TextSnippetIcon />} label="Produktionskosten" />
-        <Tab icon={<AutoStoriesIcon />} label="Kosten Druckprodukt" />
-        <Tab icon={<EuroIcon />} label="Preisbildung" />
+        <Tab
+          icon={<TextSnippetIcon />}
+          label={isDesktopSize ? "Produktionskosten" : ""}
+          aria-label="Produktionskosten"
+        />
+        <Tab
+          icon={<AutoStoriesIcon />}
+          label={isDesktopSize ? "Kosten Druckprodukt" : ""}
+          aria-label="Kosten Druckprodukt"
+        />
+        <Tab
+          icon={<EuroIcon />}
+          label={isDesktopSize ? "Preisbildung" : ""}
+          aria-label="Preisbildung"
+        />
       </Tabs>
       <Divider />
       <CalculationTabPanel value={selectedTab} index={0}>
         <ProductionCostForm
           startCosts={bookCosts.productionCosts}
           onCostChanged={onProductionCostChanged}
+          isDesktopSize={isDesktopSize}
         />
       </CalculationTabPanel>
       <CalculationTabPanel value={selectedTab} index={1}>
         <PrintCostForm
           onCostChanged={onPrintingCostChanged}
           startCosts={bookCosts.printCosts}
+          isDesktopSize={isDesktopSize}
         />
       </CalculationTabPanel>
       <CalculationTabPanel value={selectedTab} index={2}>
@@ -145,6 +174,7 @@ export function CostCalculation(props: CostCalculationProps) {
           }
           printStartPriceAndDiscount={priceAndDiscount.printPriceAndDiscount}
           onPriceAndDiscountChange={onPriceAndDiscountChange}
+          isDesktopSize={isDesktopSize}
         />
       </CalculationTabPanel>
     </Box>
