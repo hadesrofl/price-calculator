@@ -2,10 +2,12 @@ import { Grid, Typography, Divider, Chip, Box } from "@mui/material";
 import {
   BookCosts,
   PriceAndDiscountsPerProductType,
-} from "../../CostCalculation/CostCalculation";
+} from "../../../costs/CostCalculation";
 import { useEffect, useState } from "react";
-
-export type ProductType = "digital" | "print" | "bundle";
+import calculateEarnings from "../../services/calculateDiscount";
+import calculateBreakEven from "../../services/calculateBreakEven";
+import calculateProfit from "../../services/calculateProfit";
+import { ProductType } from "../../../types/ProductType";
 
 interface CalculationCardContentProps {
   productType: ProductType;
@@ -32,31 +34,9 @@ export function CalculationCardContent(props: CalculationCardContentProps) {
   const [breakEven, setBreakEven] = useState(0);
 
   useEffect(() => {
-    switch (productType) {
-      case "digital":
-        const digitalDiscountValue =
-          (priceAndDiscount.digitalPriceAndDiscount.pricePerIssue *
-            priceAndDiscount.digitalPriceAndDiscount.discountPerIssue) /
-          100;
-        setEarnings(
-          priceAndDiscount.digitalPriceAndDiscount.pricePerIssue -
-            digitalDiscountValue
-        );
-        break;
-      case "print":
-        const printDiscountValue =
-          (priceAndDiscount.printPriceAndDiscount.pricePerIssue *
-            priceAndDiscount.printPriceAndDiscount.discountPerIssue) /
-          100;
-        setEarnings(
-          priceAndDiscount.printPriceAndDiscount.pricePerIssue -
-            printDiscountValue
-        );
-        break;
-      case "bundle":
-        break;
-    }
+    setEarnings(calculateEarnings(productType, priceAndDiscount));
   }, [
+    priceAndDiscount,
     priceAndDiscount.digitalPriceAndDiscount.discountPerIssue,
     priceAndDiscount.digitalPriceAndDiscount.pricePerIssue,
     priceAndDiscount.printPriceAndDiscount.discountPerIssue,
@@ -65,24 +45,9 @@ export function CalculationCardContent(props: CalculationCardContentProps) {
   ]);
 
   useEffect(() => {
-    if (bookCosts.productionCosts.totalCosts !== undefined && earnings !== 0)
-      switch (productType) {
-        case "digital":
-          setBreakEven(bookCosts.productionCosts.totalCosts / earnings);
-          break;
-        case "print":
-          setBreakEven(
-            (bookCosts.productionCosts.totalCosts +
-              bookCosts.printCosts.printingCost +
-              bookCosts.printCosts.additionalCostPerIssue *
-                bookCosts.printCosts.amount) /
-              earnings
-          );
-          break;
-        case "bundle":
-          break;
-      }
+    setBreakEven(calculateBreakEven(bookCosts, productType, earnings));
   }, [
+    bookCosts,
     bookCosts.printCosts.additionalCostPerIssue,
     bookCosts.printCosts.amount,
     bookCosts.printCosts.printingCost,
@@ -92,7 +57,9 @@ export function CalculationCardContent(props: CalculationCardContentProps) {
   ]);
 
   useEffect(() => {
-    setProfit(earnings - bookCosts.printCosts.additionalCostPerIssue);
+    setProfit(
+      calculateProfit(earnings, bookCosts.printCosts.additionalCostPerIssue)
+    );
   }, [bookCosts.printCosts.additionalCostPerIssue, earnings]);
 
   return (

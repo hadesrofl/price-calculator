@@ -6,7 +6,7 @@ import PrintCalculationCard from "./cards/PrintCalculationCard";
 import {
   BookCosts,
   PriceAndDiscountsPerProductType,
-} from "../CostCalculation/CostCalculation";
+} from "../costs/CostCalculation";
 
 export interface SalesCalculationProps {
   bookCosts: BookCosts;

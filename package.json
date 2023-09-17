@@ -1,5 +1,5 @@
 {
-  "name": "book-price-calculator",
+  "name": "price-calculator",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,11 +13,13 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.7",
     "@mui/material": "^5.14.7",
+    "joi": "^17.10.2",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@types/joi": "^17.2.3",
     "@types/node": "20.5.8",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",

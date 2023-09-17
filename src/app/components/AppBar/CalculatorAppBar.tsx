@@ -3,6 +3,7 @@ import Logo from "../Logo";
 
 export default function CalculatorAppBar() {
   const theme = useTheme();
+  const title = "Price Calculator";
   return (
     <AppBar component="nav">
       {/* <Container> */}
@@ -31,7 +32,7 @@ export default function CalculatorAppBar() {
               textDecoration: "none",
             }}
           >
-            Book Price Calculator
+            {title}
           </Typography>
         </Stack>
       </Toolbar>

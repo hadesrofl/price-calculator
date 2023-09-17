@@ -1,8 +1,15 @@
-import { BottomNavigation, Paper, Typography } from "@mui/material";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import SoftwareVersion from "../SoftwareVersion";
+import IsDesktopSizeProps from "../shared/IsDesktopSizeProp";
 
-export default function CalculatorBottomBar() {
+export default function CalculatorBottomBar(props: IsDesktopSizeProps) {
+  const { isDesktopSize } = props;
   const [value, setValue] = useState(0);
   return (
     <Paper
@@ -11,7 +18,7 @@ export default function CalculatorBottomBar() {
         bottom: 0,
         left: 0,
         right: 0,
-        height: "35px",
+        minHeigh: "20px",
       }}
       elevation={3}
     >
@@ -22,18 +29,25 @@ export default function CalculatorBottomBar() {
           setValue(newValue);
         }}
         sx={{
-          alignItems: "baseline",
-          marginTop: "10px",
+          alignItems: "center",
+          marginTop: "0px",
           justifyContent: "space-around",
         }}
       >
-        <SoftwareVersion variant="subtitle2" />
-        <a href="https://www.flaticon.com/free-icons/price">
-          {" "}
-          <Typography variant="subtitle2" noWrap>
-            Logo created by juicy_fish - Flaticon
-          </Typography>
-        </a>
+        <BottomNavigationAction
+          disabled
+          label={<SoftwareVersion variant="subtitle2" color="InfoText" />}
+        />
+        <BottomNavigationAction
+          label={
+            <a href="https://www.flaticon.com/free-icons/price">
+              {" "}
+              <Typography variant="subtitle2" noWrap={isDesktopSize}>
+                Logo created by juicy_fish - Flaticon
+              </Typography>
+            </a>
+          }
+        />
       </BottomNavigation>
     </Paper>
   );

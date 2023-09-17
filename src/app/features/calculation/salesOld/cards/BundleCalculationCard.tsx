@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import CalculationCardProps from "./shared/CalculationCardProps";
-import { CalculationCardContent } from "./CalculationCardContent";
+import { CalculationCardContent } from "./shared/CalculationCardContent";
 
 export default function BundleCalculationCard(props: CalculationCardProps) {
   const { minHeight, bookCosts, priceAndDiscount } = props;
