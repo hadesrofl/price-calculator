@@ -1,47 +1,40 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Stack,
   Box,
   Typography,
   Grid,
-  useTheme,
   Tooltip,
   IconButton,
 } from "@mui/material";
 import IsDesktopSizeProps from "@/app/components/shared/IsDesktopSizeProp";
-import { Sales, areSalesEqual, calculateSales } from "../types/Sales";
+import { Sales, calculateSales } from "../types/Sales";
 import DetailedCostStatement from "../components/DetailedCostStatement";
-import NumberInput from "../components/NumberInput";
+import NumberInput from "../components/inputs/NumberInput";
 import {
   pricePerUnitValidationSchema,
   salesVolumeValidationSchema,
   useSalesValidator,
 } from "./validation/useSalesValidator";
-import { Info } from "@mui/icons-material";
+import Info from "@mui/icons-material/Info";
 
 export interface SalesFormProps extends IsDesktopSizeProps {
   onSalesChanged: (newSales: Sales) => void;
-  startSales: Sales;
+  sales: Sales;
+  currency: string;
 }
 
 export default function SalesForm(props: SalesFormProps) {
-  const { onSalesChanged, startSales, isDesktopSize } = props;
+  const { onSalesChanged, sales, isDesktopSize, currency } = props;
+  const FractionDigits = 2;
   const { validationErrors, validate } = useSalesValidator();
-  const [firstCalculationDone, setFirstCalculationDone] =
-    useState<boolean>(false);
-
-  const [sales, setSales] = useState<Sales>(startSales);
-  const [salesVolume, setSalesVolume] = useState<number>(startSales.volume);
-  const [pricePerUnit, setPricePerUnit] = useState<number>(
-    startSales.pricePerUnit
-  );
-
+  const [volume, setVolume] = useState<number>(sales.volume);
+  const [pricePerUnit, setPricePerUnit] = useState<number>(sales.pricePerUnit);
   const title = "Umsatz & Gewinn";
-  const currency = "€";
 
   const onSalesVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = validate(salesVolumeValidationSchema, event);
-    setSalesVolume(value);
+    setVolume(value);
   };
 
   const OnPricePerUnitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,39 +42,48 @@ export default function SalesForm(props: SalesFormProps) {
     setPricePerUnit(value);
   };
 
+  const updateSales = useCallback(
+    (
+      volume: number = sales.volume,
+      pricePerUnit: number = sales.pricePerUnit
+    ) => {
+      onSalesChanged(
+        calculateSales({ ...sales, volume, pricePerUnit, currency })
+      );
+    },
+    [currency, onSalesChanged, sales]
+  );
+
   useEffect(() => {
-    let newSales: Sales = sales;
     if (
-      validationErrors.pricePerUnit !== "" ||
-      validationErrors.salesVolume !== ""
-    )
-      newSales = calculateSales({
-        ...sales,
-        volume: 0,
-        pricePerUnit: 0,
-      });
-    else if (
-      !firstCalculationDone ||
-      !areSalesEqual(sales, startSales) ||
-      salesVolume !== sales.volume ||
-      pricePerUnit !== sales.pricePerUnit
+      validationErrors.salesVolume === "" &&
+      validationErrors.pricePerUnit !== ""
     ) {
-      newSales = calculateSales({
-        ...sales,
-        volume: salesVolume,
-        pricePerUnit,
-      });
+      updateSales(sales.volume, sales.pricePerUnit);
+      setVolume(sales.volume);
+      setPricePerUnit(sales.pricePerUnit);
     }
-    onSalesChanged(newSales);
-    setSales(newSales);
-    setFirstCalculationDone(true);
   }, [
-    salesVolume,
-    pricePerUnit,
     sales,
-    onSalesChanged,
-    startSales,
-    firstCalculationDone,
+    updateSales,
+    validationErrors.pricePerUnit,
+    validationErrors.salesVolume,
+  ]);
+
+  useEffect(() => {
+    const timeoutInMs = 500;
+    const timeoutId = setTimeout(() => {
+      if (
+        validationErrors.pricePerUnit === "" &&
+        validationErrors.salesVolume === ""
+      )
+        updateSales(volume, pricePerUnit);
+    }, timeoutInMs);
+    return () => clearTimeout(timeoutId);
+  }, [
+    volume,
+    pricePerUnit,
+    updateSales,
     validationErrors.pricePerUnit,
     validationErrors.salesVolume,
   ]);
@@ -96,7 +98,7 @@ export default function SalesForm(props: SalesFormProps) {
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
-              value={salesVolume}
+              value={volume}
               customAdornmentText="Stk."
               name="salesVolume"
               onChange={onSalesVolumeChange}
@@ -140,7 +142,7 @@ export default function SalesForm(props: SalesFormProps) {
             <NumberInput
               customAdornmentText={currency}
               readonly
-              value={sales.costPrice}
+              value={sales.costPrice.toFixed(FractionDigits)}
               name="costPrice"
             />
           </Grid>
@@ -151,7 +153,7 @@ export default function SalesForm(props: SalesFormProps) {
             <NumberInput
               customAdornmentText={currency}
               readonly
-              value={sales.revenue}
+              value={sales.revenue.toFixed(FractionDigits)}
               name="revenue"
             />
           </Grid>
@@ -164,13 +166,12 @@ export default function SalesForm(props: SalesFormProps) {
                 </IconButton>
               </Stack>
             </Tooltip>
-            <Typography></Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
               customAdornmentText={currency}
               readonly
-              value={sales.unitContributionMargin}
+              value={sales.unitContributionMargin.toFixed(FractionDigits)}
               name="unitContributionMargin"
             />
           </Grid>
@@ -181,7 +182,7 @@ export default function SalesForm(props: SalesFormProps) {
             <NumberInput
               customAdornmentText={currency}
               readonly
-              value={sales.profit}
+              value={sales.profit.toFixed(FractionDigits)}
               name="profit"
             />
           </Grid>

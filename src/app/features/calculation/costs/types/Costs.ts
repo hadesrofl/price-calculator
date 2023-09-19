@@ -1,12 +1,20 @@
 export type Cost = {
   label: string;
   value: number;
+  currency: string;
 };
 
 export type Costs = {
   fixCosts: Cost[];
   variableCosts: Cost[];
 };
+
+export function createEmptyCosts() {
+  return {
+    fixCosts: [],
+    variableCosts: [],
+  };
+}
 
 export function areCostsEqual(costs: Cost[], otherCosts: Cost[]) {
   return (

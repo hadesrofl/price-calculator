@@ -6,43 +6,35 @@ import {
   Box,
   IconButton,
 } from "@mui/material";
-import { CSSProperties, useEffect, useState } from "react";
-import { CustomAdornment } from "@/app/components/shared/CustomAdornment";
 import IsDesktopSizeProps from "@/app/components/shared/IsDesktopSizeProp";
 import Add from "@mui/icons-material/Add";
-import { Cost, areCostsEqual } from "../types/Costs";
+import { Cost } from "../types/Costs";
 import useTextFieldStyles from "../styles/useTextFieldStyles";
-import NumberInput from "../components/NumberInput";
+import NumberInput from "../components/inputs/NumberInput";
 import {
   labelSchema,
   useCostValidator,
   valueSchema,
 } from "./validation/useCostValidator";
-import { ValidationError } from "joi";
 
 export interface CostFormProps extends IsDesktopSizeProps {
   onCostChanged: (costs: Cost[]) => void;
-  startCosts: Cost[];
+  costs: Cost[];
   title: string;
+  currency: string;
 }
 
 export default function CostForm(props: CostFormProps) {
-  const { onCostChanged, startCosts, isDesktopSize, title } = props;
-  const [costs, setCosts] = useState<Cost[]>(startCosts);
+  const { onCostChanged, costs, isDesktopSize, title, currency } = props;
   const { textFieldSx } = useTextFieldStyles();
-  const { validationErrors, validate, hasError, getError } = useCostValidator();
-
-  useEffect(() => {
-    const costsEqual = areCostsEqual(costs, startCosts);
-    if (!costsEqual) onCostChanged(costs);
-  }, [costs, onCostChanged, startCosts]);
+  const { validate, hasError, getError } = useCostValidator();
 
   const onLabelChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = validate(labelSchema, event);
     const newCosts = [...costs];
     var index = Number.parseInt(event.target.name);
     newCosts[index].label = value.toString();
-    setCosts(newCosts);
+    onCostChanged([...newCosts]);
   };
 
   const onValueChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,14 +42,13 @@ export default function CostForm(props: CostFormProps) {
     const newCosts = [...costs];
     var index = Number.parseInt(event.target.name);
     newCosts[index].value = Number.parseFloat(value.toString());
-    setCosts(newCosts);
+    onCostChanged([...newCosts]);
   };
 
   const addInputField = () => {
-    setCosts([...costs, { label: "", value: 0 }]);
+    onCostChanged([...costs, { label: "", value: 0, currency }]);
   };
 
-  const currency = "€";
   return (
     <Stack alignItems="left">
       {isDesktopSize ? <Box /> : <Typography variant="h5">{title}</Typography>}

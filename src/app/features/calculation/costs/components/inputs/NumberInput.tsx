@@ -1,6 +1,6 @@
 import { CustomAdornment } from "@/app/components/shared/CustomAdornment";
 import { StandardTextFieldProps, TextField, useTheme } from "@mui/material";
-import useTextFieldStyles from "../styles/useTextFieldStyles";
+import useTextFieldStyles from "../../styles/useTextFieldStyles";
 
 export interface NumberInputProps extends StandardTextFieldProps {
   customAdornmentText: string;

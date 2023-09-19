@@ -1,4 +1,4 @@
-import { Costs, calculateTotalCosts } from "./Costs";
+import { Costs, calculateTotalCosts, createEmptyCosts } from "./Costs";
 
 export type Sales = {
   costs: Costs;
@@ -8,7 +8,21 @@ export type Sales = {
   revenue: number;
   unitContributionMargin: number;
   profit: number;
+  currency: string;
 };
+
+export function createEmptySales(currency: string) {
+  return {
+    costs: createEmptyCosts(),
+    costPrice: 0,
+    pricePerUnit: 0,
+    volume: 0,
+    revenue: 0,
+    unitContributionMargin: 0,
+    profit: 0,
+    currency,
+  };
+}
 
 export function calculateSales(sales: Sales): Sales {
   const totalFixCosts = calculateTotalCosts(sales.costs.fixCosts);
