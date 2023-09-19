@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import IsDesktopSizeProps from "@/app/components/shared/IsDesktopSizeProp";
 import { Sales, calculateSales } from "../types/Sales";
-import DetailedCostStatement from "../components/DetailedCostStatement";
 import NumberInput from "../components/inputs/NumberInput";
 import {
   pricePerUnitValidationSchema,
@@ -17,6 +16,7 @@ import {
   useSalesValidator,
 } from "./validation/useSalesValidator";
 import Info from "@mui/icons-material/Info";
+import DetailedCostStatement from "../components/costStatement/DetailedCostStatement";
 
 export interface SalesFormProps extends IsDesktopSizeProps {
   onSalesChanged: (newSales: Sales) => void;

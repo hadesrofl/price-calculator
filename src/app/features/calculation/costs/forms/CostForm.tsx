@@ -7,7 +7,6 @@ import {
   IconButton,
 } from "@mui/material";
 import IsDesktopSizeProps from "@/app/components/shared/IsDesktopSizeProp";
-import Add from "@mui/icons-material/Add";
 import { Cost } from "../types/Costs";
 import useTextFieldStyles from "../styles/useTextFieldStyles";
 import NumberInput from "../components/inputs/NumberInput";
@@ -16,6 +15,8 @@ import {
   useCostValidator,
   valueSchema,
 } from "./validation/useCostValidator";
+import Delete from "@mui/icons-material/Delete";
+import AddCircle from "@mui/icons-material/AddCircle";
 
 export interface CostFormProps extends IsDesktopSizeProps {
   onCostChanged: (costs: Cost[]) => void;
@@ -54,9 +55,13 @@ export default function CostForm(props: CostFormProps) {
       {isDesktopSize ? <Box /> : <Typography variant="h5">{title}</Typography>}
       <Stack direction={isDesktopSize ? "row" : "column"} spacing={2}>
         <Grid container rowSpacing={2}>
-          {costs.map((cost, i) => {
+          {costs.map((cost, idx) => {
+            const onDeleteCost = () => {
+              const newCosts = costs.filter((_, i) => i !== idx);
+              onCostChanged([...newCosts]);
+            };
             return (
-              <Grid container key={i}>
+              <Grid container key={idx} marginBottom={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     variant="filled"
@@ -64,37 +69,42 @@ export default function CostForm(props: CostFormProps) {
                     type="text"
                     placeholder="Kostenname"
                     value={cost.label}
-                    name={`${i.toString()}_label`}
+                    name={`${idx.toString()}_label`}
                     inputProps={{ style: textFieldSx }}
                     onChange={onLabelChanged}
-                    error={hasError(`${i.toString()}_label`) ? true : false}
+                    error={hasError(`${idx.toString()}_label`) ? true : false}
                     helperText={
-                      hasError(`${i.toString()}_label`)
-                        ? getError(`${i.toString()}_label`)
+                      hasError(`${idx.toString()}_label`)
+                        ? getError(`${idx.toString()}_label`)
                         : ""
                     }
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <NumberInput
-                    value={cost.value}
-                    name={`${i.toString()}_value`}
-                    customAdornmentText={currency}
-                    onChange={onValueChanged}
-                    error={hasError(`${i.toString()}_value`) ? true : false}
-                    helperText={
-                      hasError(`${i.toString()}_value`)
-                        ? getError(`${i.toString()}_value`)
-                        : ""
-                    }
-                  />
+                  <Stack direction="row" alignItems="end">
+                    <NumberInput
+                      value={cost.value}
+                      name={`${idx.toString()}_value`}
+                      customAdornmentText={currency}
+                      onChange={onValueChanged}
+                      error={hasError(`${idx.toString()}_value`) ? true : false}
+                      helperText={
+                        hasError(`${idx.toString()}_value`)
+                          ? getError(`${idx.toString()}_value`)
+                          : ""
+                      }
+                    />
+                    <IconButton onClick={onDeleteCost} color="error">
+                      <Delete />
+                    </IconButton>
+                  </Stack>
                 </Grid>
               </Grid>
             );
           })}
           <Grid item xs={12} md={6}>
             <IconButton color="success" onClick={addInputField}>
-              <Add />
+              <AddCircle />
             </IconButton>
           </Grid>
         </Grid>
