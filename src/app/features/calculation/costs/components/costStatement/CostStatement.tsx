@@ -7,6 +7,11 @@ interface CostStatementProps {
   title: string;
 }
 
+/**
+ * Creates a cost statement which shows a list of given costs
+ * @param {CostStatementProps} props Are the properties for this cost statement like the title and an array of costs
+ * @returns {JSX.Element} A cost statement entry listing all giving costs
+ */
 export default function CostStatement(props: CostStatementProps) {
   const { costs, currency, title } = props;
 

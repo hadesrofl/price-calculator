@@ -1,7 +1,11 @@
 import { AppBar, Stack, Toolbar, Typography, useTheme } from "@mui/material";
 import Logo from "../Logo";
 
-export default function CalculatorAppBar() {
+/**
+ * Create the application title bar for this application
+ * @returns {JSX.Element} the application title bar
+ */
+export default function CalculatorAppBar(): JSX.Element {
   const theme = useTheme();
   const title = "Price Calculator";
   return (

@@ -25,7 +25,11 @@ enum CalculatorTabs {
   Sales,
 }
 
-export function CostCalculation() {
+/**
+ * Creates the cost calculation, meaning the cost and sales form to work out a pricing calucation with
+ * @returns {JSX.Element} the cost calculation as an JSX.Element
+ */
+export function CostCalculation(): JSX.Element {
   const [selectedTab, setSelectedTab] = useState(0);
   const currency = "€";
   const exportFileName = "calculation.json";

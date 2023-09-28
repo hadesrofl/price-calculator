@@ -18,12 +18,20 @@ import {
 import Info from "@mui/icons-material/Info";
 import DetailedCostStatement from "../components/costStatement/DetailedCostStatement";
 
+/**
+ * Interface for the properties of the {@link SalesForm} like a handler in case sales changed
+ */
 export interface SalesFormProps extends IsDesktopSizeProps {
   onSalesChanged: (newSales: Sales) => void;
   sales: Sales;
   currency: string;
 }
 
+/**
+ * Creates a sales form that handles fields for inputting different sales parameter and shows the calculation
+ * @param {CostFormProps} props Are the properties of this form like an update function in case sales changed
+ * @returns {JSX.Element} the form as JSX.Element
+ */
 export default function SalesForm(props: SalesFormProps) {
   const { onSalesChanged, sales, isDesktopSize, currency } = props;
   const FractionDigits = 2;

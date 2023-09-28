@@ -1,9 +1,19 @@
 import Joi, { ValidationError } from "joi";
 import { useState } from "react";
 
+/**
+ * Validation schema for cost values
+ */
 export const valueSchema = Joi.number().positive().required();
+/**
+ * Validation schema for cost labels
+ */
 export const labelSchema = Joi.string().min(1).required();
 
+/**
+ * Creates a validator for {@link CostForm} and checks the form fields and manages their errors states
+ * @returns a validator and its functions
+ */
 export function useCostValidator() {
   const [validationErrors, setValidationErrors] = useState({});
 

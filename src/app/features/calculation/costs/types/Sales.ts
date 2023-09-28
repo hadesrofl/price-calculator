@@ -1,5 +1,8 @@
 import { Costs, calculateTotalCosts, createEmptyCosts } from "./Costs";
 
+/**
+ * The definition of sales which contain the calculation of costs, sales volumes and pricing
+ */
 export type Sales = {
   costs: Costs;
   costPrice: number;
@@ -11,6 +14,11 @@ export type Sales = {
   currency: string;
 };
 
+/**
+ * Builder function to create an empty {@link Sales} entity
+ * @param {string} currency Is the currency as string
+ * @returns an empty {@link Sales} entity
+ */
 export function createEmptySales(currency: string) {
   return {
     costs: createEmptyCosts(),
@@ -24,6 +32,11 @@ export function createEmptySales(currency: string) {
   };
 }
 
+/**
+ * Calculates the derived values based on sales volume, pricing and costs like unit contribution margin, revenue and profit
+ * @param {Sales} sales Are the sales values to base the calculation on
+ * @returns {Sales} the updated sales entity with the new calculated values
+ */
 export function calculateSales(sales: Sales): Sales {
   const totalFixCosts = calculateTotalCosts(sales.costs.fixCosts);
   const totalVariableCosts =
@@ -46,6 +59,12 @@ export function calculateSales(sales: Sales): Sales {
   };
 }
 
+/**
+ * Checks whether or not two {@link Sales} are equal
+ * @param {Sales} sales Is an entry of sales
+ * @param {Sales} otherSales Is the another entry of sales
+ * @returns {boolean} true in case both are equal, otherwise false
+ */
 export function areSalesEqual(sales: Sales, otherSales: Sales) {
   let k: keyof Sales;
   for (k in sales) {

@@ -8,6 +8,11 @@ interface ExportButtonProps extends IsDesktopSizeProps {
   exportFileName: string;
 }
 
+/**
+ * Creates a button for exporting the calculation
+ * @param {ExportButtonProps} props Are the properties for this export button like the data and filename
+ * @returns {JSX.Element} the export button as JSX.Element
+ */
 export default function ExportButton(props: ExportButtonProps) {
   const { exportData, exportFileName, isDesktopSize } = props;
   const [exportFile, setExportFile] = useState<string>("");

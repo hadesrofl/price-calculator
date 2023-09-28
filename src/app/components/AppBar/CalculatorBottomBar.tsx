@@ -8,7 +8,14 @@ import { useState } from "react";
 import SoftwareVersion from "../SoftwareVersion";
 import IsDesktopSizeProps from "../shared/IsDesktopSizeProp";
 
-export default function CalculatorBottomBar(props: IsDesktopSizeProps) {
+/**
+ * Create a bottom bar for this application
+ * @param {IsDesktopSizeProps} props Are properties for this bottom bar
+ * @returns {JSX.Element} a bottom bar JSX element
+ */
+export default function CalculatorBottomBar(
+  props: IsDesktopSizeProps
+): JSX.Element {
   const { isDesktopSize } = props;
   const [value, setValue] = useState(0);
   return (

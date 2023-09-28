@@ -9,11 +9,19 @@ import {
 import CostStatement from "./CostStatement";
 import { Costs, calculateTotalCosts } from "../../types/Costs";
 
+/**
+ * An interface for the properties of {@link DetailedCostStatement}
+ */
 export interface DetailedCostStatementProps {
   costs: Costs;
   currency: string;
 }
 
+/**
+ * Creates a detailed cost statement for a single, given cost entity
+ * @param {DetailedCostStatementProps} props Are the properties for this cost statment like the cost and currency
+ * @returns {JSX.Element} The detailed cost statement entry for the given cost
+ */
 export default function DetailedCostStatement(
   props: DetailedCostStatementProps
 ) {

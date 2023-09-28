@@ -2,12 +2,20 @@ import { CustomAdornment } from "@/app/components/shared/CustomAdornment";
 import { StandardTextFieldProps, TextField, useTheme } from "@mui/material";
 import useTextFieldStyles from "../../styles/useTextFieldStyles";
 
+/**
+ * An interface for {@link NumberInput} to allow customization of the input
+ */
 export interface NumberInputProps extends StandardTextFieldProps {
   customAdornmentText: string;
   readonly?: boolean;
   onlyPositiveValues?: boolean;
 }
 
+/**
+ * Creates a number input that allows custom symbols and only positive values by the given properties
+ * @param {NumberInputProps} props Are the properties for the number input
+ * @returns {JSX.Element} the number input element
+ */
 export default function NumberInput(props: NumberInputProps) {
   const {
     inputProps,

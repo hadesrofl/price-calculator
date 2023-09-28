@@ -7,6 +7,11 @@ interface ImportButtonProps extends IsDesktopSizeProps {
   onUpload: (fileContent: string) => void;
 }
 
+/**
+ * Creates an import button that informs about the event of reading new data
+ * @param {ImportButtonProps} props Are the properties for this import button like the handler for uploading
+ * @returns {JSX.Element} the import button as JSX.Element
+ */
 export default function ImportButton(props: ImportButtonProps) {
   const { onUpload, isDesktopSize } = props;
 
