@@ -15,7 +15,7 @@ export default function Home() {
         <Stack spacing={2} marginRight="5%" marginBottom="5%">
           <Divider />
           <CostCalculation />
-          <CalculatorBottomBar isDesktopSize={isDesktopSize} />
+          <CalculatorBottomBar />
         </Stack>
       </Box>
     </Box>

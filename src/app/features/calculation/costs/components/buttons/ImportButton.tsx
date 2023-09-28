@@ -1,9 +1,9 @@
 import CloudUpload from "@mui/icons-material/CloudUpload";
 import { Button } from "@mui/material";
 import HiddenInputField from "../inputs/HiddenInputField";
-import IsDesktopSizeProps from "@/app/components/shared/IsDesktopSizeProp";
+import useDesktopSize from "@/app/hooks/useDesktopSize";
 
-interface ImportButtonProps extends IsDesktopSizeProps {
+export interface ImportButtonProps {
   onUpload: (fileContent: string) => void;
 }
 
@@ -13,7 +13,8 @@ interface ImportButtonProps extends IsDesktopSizeProps {
  * @returns {JSX.Element} the import button as JSX.Element
  */
 export default function ImportButton(props: ImportButtonProps) {
-  const { onUpload, isDesktopSize } = props;
+  const { onUpload } = props;
+  const isDesktopSize = useDesktopSize();
 
   const onImportFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (

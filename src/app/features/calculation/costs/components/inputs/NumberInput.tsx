@@ -1,4 +1,3 @@
-import { CustomAdornment } from "@/app/components/shared/CustomAdornment";
 import { StandardTextFieldProps, TextField, useTheme } from "@mui/material";
 import useTextFieldStyles from "../../styles/useTextFieldStyles";
 
@@ -54,7 +53,7 @@ export default function NumberInput(props: NumberInputProps) {
         style: readonly
           ? { background: theme.palette.background.default }
           : undefined,
-        startAdornment: <CustomAdornment text={customAdornmentText} />,
+        // startAdornment: <CustomAdornment text={customAdornmentText} />,
         ...InputProps,
       }}
       {...otherProps}
