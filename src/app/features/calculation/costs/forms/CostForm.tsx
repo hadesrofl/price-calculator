@@ -6,7 +6,6 @@ import {
   Box,
   IconButton,
 } from "@mui/material";
-import IsDesktopSizeProps from "@/app/components/shared/IsDesktopSizeProp";
 import { Cost } from "../types/Costs";
 import useTextFieldStyles from "../styles/useTextFieldStyles";
 import NumberInput from "../components/inputs/NumberInput";
@@ -17,11 +16,12 @@ import {
 } from "./validation/useCostValidator";
 import Delete from "@mui/icons-material/Delete";
 import AddCircle from "@mui/icons-material/AddCircle";
+import useDesktopSize from "@/app/hooks/useDesktopSize";
 
 /**
  * Interface for the properties of the {@link CostForm} like a handler in case cost changed
  */
-export interface CostFormProps extends IsDesktopSizeProps {
+export interface CostFormProps {
   onCostChanged: (costs: Cost[]) => void;
   costs: Cost[];
   title: string;
@@ -34,7 +34,8 @@ export interface CostFormProps extends IsDesktopSizeProps {
  * @returns {JSX.Element} the form as JSX.Element
  */
 export default function CostForm(props: CostFormProps): JSX.Element {
-  const { onCostChanged, costs, isDesktopSize, title, currency } = props;
+  const { onCostChanged, costs, title, currency } = props;
+  const isDesktopSize = useDesktopSize();
   const { textFieldSx } = useTextFieldStyles();
   const { validate, hasError, getError } = useCostValidator();
 

@@ -5,18 +5,16 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import useDesktopSize from "@/app/hooks/useDesktopSize";
 import SoftwareVersion from "../SoftwareVersion";
-import IsDesktopSizeProps from "../shared/IsDesktopSizeProp";
 
 /**
  * Create a bottom bar for this application
  * @param {IsDesktopSizeProps} props Are properties for this bottom bar
  * @returns {JSX.Element} a bottom bar JSX element
  */
-export default function CalculatorBottomBar(
-  props: IsDesktopSizeProps
-): JSX.Element {
-  const { isDesktopSize } = props;
+export default function CalculatorBottomBar(): JSX.Element {
+  const isDesktopSize = useDesktopSize();
   const [value, setValue] = useState(0);
   return (
     <Paper

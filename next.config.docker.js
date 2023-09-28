@@ -5,7 +5,7 @@ const nextConfig = {
     env: {
         NEXT_PUBLIC_APP_VERSION: packageJson.version
     },
-    output: 'export',
+    output: 'standalone',
 }
 
 module.exports = nextConfig

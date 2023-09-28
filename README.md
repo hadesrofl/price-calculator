@@ -1,4 +1,4 @@
-This is a simple price calculation app. A demo is hosted at https://calculator.pen-paper-dice.de. A docker image is available for self-hosting on [docker hub](https://hub.docker.com/r/hadesrofl/price-calculator).
+This is a simple price calculation app. A demo is hosted at https://hadesrofl.github.io/price-calculator/. A docker image is available for self-hosting on [docker hub](https://hub.docker.com/r/hadesrofl/price-calculator).
 
 ## Getting Started
 

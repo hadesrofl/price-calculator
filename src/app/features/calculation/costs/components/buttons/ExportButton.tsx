@@ -1,9 +1,9 @@
-import IsDesktopSizeProps from "@/app/components/shared/IsDesktopSizeProp";
+import useDesktopSize from "@/app/hooks/useDesktopSize";
 import FileDownload from "@mui/icons-material/FileDownload";
 import { Button } from "@mui/material";
 import { useState, useCallback, useEffect } from "react";
 
-interface ExportButtonProps extends IsDesktopSizeProps {
+interface ExportButtonProps {
   exportData: Object;
   exportFileName: string;
 }
@@ -13,8 +13,9 @@ interface ExportButtonProps extends IsDesktopSizeProps {
  * @param {ExportButtonProps} props Are the properties for this export button like the data and filename
  * @returns {JSX.Element} the export button as JSX.Element
  */
-export default function ExportButton(props: ExportButtonProps) {
-  const { exportData, exportFileName, isDesktopSize } = props;
+export default function ExportButton(props: ExportButtonProps): JSX.Element {
+  const { exportData, exportFileName } = props;
+  const isDesktopSize = useDesktopSize();
   const [exportFile, setExportFile] = useState<string>("");
 
   const exportPriceCalculation = useCallback(() => {

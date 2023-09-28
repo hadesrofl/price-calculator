@@ -104,12 +104,8 @@ export function CostCalculation(): JSX.Element {
             aria-label="Umsatz & Gewinn"
           />
         </Tabs>
-        <ImportButton onUpload={onImport} isDesktopSize={isDesktopSize} />
-        <ExportButton
-          exportData={sales}
-          exportFileName={exportFileName}
-          isDesktopSize={isDesktopSize}
-        />
+        <ImportButton onUpload={onImport} />
+        <ExportButton exportData={sales} exportFileName={exportFileName} />
       </Stack>
 
       <Divider />
@@ -117,7 +113,6 @@ export function CostCalculation(): JSX.Element {
         <CostForm
           costs={sales.costs.fixCosts}
           onCostChanged={onFixCostsChanged}
-          isDesktopSize={isDesktopSize}
           title="Fixkosten"
           currency={currency}
         />
@@ -129,7 +124,6 @@ export function CostCalculation(): JSX.Element {
         <CostForm
           costs={sales.costs.variableCosts}
           onCostChanged={onVariableCostsChanged}
-          isDesktopSize={isDesktopSize}
           title="Variable Kosten"
           currency={currency}
         />
@@ -138,7 +132,6 @@ export function CostCalculation(): JSX.Element {
         <SalesForm
           onSalesChanged={onSalesChanged}
           sales={sales}
-          isDesktopSize={isDesktopSize}
           currency={currency}
         />
       </CalculationTabPanel>

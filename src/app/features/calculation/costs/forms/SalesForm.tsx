@@ -7,7 +7,6 @@ import {
   Tooltip,
   IconButton,
 } from "@mui/material";
-import IsDesktopSizeProps from "@/app/components/shared/IsDesktopSizeProp";
 import { Sales, calculateSales } from "../types/Sales";
 import NumberInput from "../components/inputs/NumberInput";
 import {
@@ -17,11 +16,12 @@ import {
 } from "./validation/useSalesValidator";
 import Info from "@mui/icons-material/Info";
 import DetailedCostStatement from "../components/costStatement/DetailedCostStatement";
+import useDesktopSize from "@/app/hooks/useDesktopSize";
 
 /**
  * Interface for the properties of the {@link SalesForm} like a handler in case sales changed
  */
-export interface SalesFormProps extends IsDesktopSizeProps {
+export interface SalesFormProps {
   onSalesChanged: (newSales: Sales) => void;
   sales: Sales;
   currency: string;
@@ -33,7 +33,8 @@ export interface SalesFormProps extends IsDesktopSizeProps {
  * @returns {JSX.Element} the form as JSX.Element
  */
 export default function SalesForm(props: SalesFormProps) {
-  const { onSalesChanged, sales, isDesktopSize, currency } = props;
+  const { onSalesChanged, sales, currency } = props;
+  const isDesktopSize = useDesktopSize();
   const FractionDigits = 2;
   const { validationErrors, validate } = useSalesValidator();
   const [volume, setVolume] = useState<number>(sales.volume);
