@@ -17,6 +17,7 @@ import {
 import Info from "@mui/icons-material/Info";
 import DetailedCostStatement from "../components/costStatement/DetailedCostStatement";
 import useDesktopSize from "@/app/hooks/useDesktopSize";
+import ButtonWithTooltip from "../components/buttons/ButtonWithTooltip";
 
 /**
  * Interface for the properties of the {@link SalesForm} like a handler in case sales changed
@@ -138,14 +139,15 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Tooltip title="Selbstkosten sind die Gesamtkosten (fixe + variable Kosten) pro Stück">
-              <Stack direction="row" alignItems="center" spacing={2}>
-                <Typography>Selbstkosten</Typography>
-                <IconButton disabled>
-                  <Info color="primary" />
-                </IconButton>
-              </Stack>
-            </Tooltip>
+            <Stack direction="row" alignItems="center" spacing={2}>
+              <Typography>Selbstkosten</Typography>
+              <ButtonWithTooltip
+                disabled
+                tooltipText="Selbstkosten sind die Gesamtkosten (fixe + variable Kosten) pro Stück"
+              >
+                <Info color="primary" />
+              </ButtonWithTooltip>
+            </Stack>
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
@@ -167,14 +169,15 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Tooltip title="Deckungsbeitrag I ergibt sich aus Umsatz - variable Kosten">
-              <Stack direction="row" alignItems="center" spacing={2}>
-                <Typography>Deckungsbeitrag I</Typography>
-                <IconButton disabled>
-                  <Info color="primary" />
-                </IconButton>
-              </Stack>
-            </Tooltip>
+            <Stack direction="row" alignItems="center" spacing={2}>
+              <Typography>Deckungsbeitrag I</Typography>
+              <ButtonWithTooltip
+                disabled
+                tooltipText="Deckungsbeitrag I ergibt sich aus Umsatz - variable Kosten"
+              >
+                <Info color="primary" />
+              </ButtonWithTooltip>
+            </Stack>
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
