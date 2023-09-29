@@ -1,5 +1,34 @@
-import { StandardTextFieldProps, TextField, useTheme } from "@mui/material";
+import {
+  InputAdornment,
+  StandardTextFieldProps,
+  TextField,
+  useTheme,
+} from "@mui/material";
 import useTextFieldStyles from "../../styles/useTextFieldStyles";
+
+/**
+ * An interface for the properties of {@link CustomAdornment}
+ */
+interface CustomAdornmentProps {
+  text: string;
+}
+
+/**
+ * Create a custom adornment for input fields
+ * @param {CustomAdornmentProps} props Are the properties of this adornment
+ * @returns {JSX.Element} the adornment as JSX.Element
+ */
+function CustomAdornment(props: CustomAdornmentProps): JSX.Element {
+  const { text } = props;
+  return (
+    <InputAdornment
+      sx={{ marginLeft: "10px", marginRight: "10px" }}
+      position="start"
+    >
+      {text}
+    </InputAdornment>
+  );
+}
 
 /**
  * An interface for {@link NumberInput} to allow customization of the input
@@ -53,7 +82,7 @@ export default function NumberInput(props: NumberInputProps) {
         style: readonly
           ? { background: theme.palette.background.default }
           : undefined,
-        // startAdornment: <CustomAdornment text={customAdornmentText} />,
+        startAdornment: <CustomAdornment text={customAdornmentText} />,
         ...InputProps,
       }}
       {...otherProps}
