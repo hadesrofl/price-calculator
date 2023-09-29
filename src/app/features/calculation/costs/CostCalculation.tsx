@@ -15,7 +15,12 @@ import CalculationTabPanel from "./components/CalculationTabPanel";
 import CostForm from "./forms/CostForm";
 import SalesForm from "./forms/SalesForm";
 import { Cost } from "./types/Costs";
-import { Sales, areSalesEqual, createEmptySales } from "./types/Sales";
+import {
+  Sales,
+  areSalesEqual,
+  createEmptySales,
+  setUndefinedValuesAfterImport,
+} from "./types/Sales";
 import ExportButton from "./components/buttons/ExportButton";
 import ImportButton from "./components/buttons/ImportButton";
 
@@ -33,7 +38,7 @@ export function CostCalculation(): JSX.Element {
   const [selectedTab, setSelectedTab] = useState(0);
   const currency = "€";
   const exportFileName = "calculation.json";
-  const [importData, setimportData] = useState<Sales>(
+  const [importData, setImportData] = useState<Sales>(
     createEmptySales(currency)
   );
   const [sales, setSales] = useState<Sales>(createEmptySales(currency));
@@ -61,7 +66,8 @@ export function CostCalculation(): JSX.Element {
   const onImport = (fileContent: string) => {
     const jsonData: Sales = JSON.parse(fileContent);
     if (jsonData !== undefined && jsonData !== null) {
-      setimportData(jsonData);
+      const importedSales = setUndefinedValuesAfterImport(jsonData);
+      setImportData(importedSales);
     }
   };
 

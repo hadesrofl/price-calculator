@@ -7,6 +7,7 @@ export type Sales = {
   costs: Costs;
   costPrice: number;
   pricePerUnit: number;
+  breakEven: number;
   volume: number;
   revenue: number;
   unitContributionMargin: number;
@@ -24,6 +25,7 @@ export function createEmptySales(currency: string) {
     costs: createEmptyCosts(),
     costPrice: 0,
     pricePerUnit: 0,
+    breakEven: 0,
     volume: 0,
     revenue: 0,
     unitContributionMargin: 0,
@@ -46,6 +48,10 @@ export function calculateSales(sales: Sales): Sales {
   )
     ? 0
     : (totalFixCosts + totalVariableCosts) / sales.volume;
+  const totalCosts = totalFixCosts + totalVariableCosts;
+  const breakEven = !Number.isFinite(totalCosts / sales.pricePerUnit)
+    ? 0
+    : totalCosts / sales.pricePerUnit;
   const revenue = sales.pricePerUnit * sales.volume;
   const unitContributionMargin = revenue - totalVariableCosts;
   const profit = unitContributionMargin - totalFixCosts;
@@ -53,6 +59,7 @@ export function calculateSales(sales: Sales): Sales {
   return {
     ...sales,
     costPrice,
+    breakEven,
     revenue,
     unitContributionMargin,
     profit,
@@ -71,4 +78,17 @@ export function areSalesEqual(sales: Sales, otherSales: Sales) {
     if (sales[k] !== otherSales[k]) return false;
   }
   return true;
+}
+
+/**
+ * Adds the missing fields in case we import something that was exported with an older {@link Sales} definition
+ * @param {Sales} sales Is the imported data
+ * @returns a {@link Sales} object that has default values in case some fields weren't defined in the import
+ */
+export function setUndefinedValuesAfterImport(sales: Sales): Sales {
+  let updatedSales = Object.assign(
+    createEmptySales(sales.currency !== undefined ? sales.currency : ""),
+    sales
+  );
+  return updatedSales;
 }
