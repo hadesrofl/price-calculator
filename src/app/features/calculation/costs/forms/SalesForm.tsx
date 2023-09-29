@@ -1,12 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import {
-  Stack,
-  Box,
-  Typography,
-  Grid,
-  Tooltip,
-  IconButton,
-} from "@mui/material";
+import { Stack, Box, Typography, Grid } from "@mui/material";
 import { Sales, calculateSales } from "../types/Sales";
 import NumberInput from "../components/inputs/NumberInput";
 import {
@@ -18,6 +11,32 @@ import Info from "@mui/icons-material/Info";
 import DetailedCostStatement from "../components/costStatement/DetailedCostStatement";
 import useDesktopSize from "@/app/hooks/useDesktopSize";
 import ButtonWithTooltip from "../components/buttons/ButtonWithTooltip";
+
+function CreateSalesLabelGridItem(
+  labelText: string,
+  tooltipText?: string
+): JSX.Element {
+  return (
+    <Grid container alignItems="center">
+      <Grid item xs={1}>
+        {tooltipText !== undefined ? (
+          <ButtonWithTooltip
+            disabled
+            tooltipText={tooltipText}
+            sx={{ justifyContent: "left" }}
+          >
+            <Info color="primary" />
+          </ButtonWithTooltip>
+        ) : (
+          <Box />
+        )}
+      </Grid>
+      <Grid item xs={10}>
+        <Typography>{labelText}</Typography>
+      </Grid>
+    </Grid>
+  );
+}
 
 /**
  * Interface for the properties of the {@link SalesForm} like a handler in case sales changed
@@ -104,7 +123,7 @@ export default function SalesForm(props: SalesFormProps) {
       <Stack direction={isDesktopSize ? "row" : "column"} spacing={2}>
         <Grid alignItems="center" container rowSpacing={2}>
           <Grid item xs={12} sm={6}>
-            <Typography>Absatzmenge</Typography>
+            {CreateSalesLabelGridItem("Absatzmenge")}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
@@ -121,7 +140,7 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography>Stückpreis</Typography>
+            {CreateSalesLabelGridItem("Stückpreis")}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
@@ -139,15 +158,10 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Stack direction="row" alignItems="center" spacing={2}>
-              <Typography>Selbstkosten</Typography>
-              <ButtonWithTooltip
-                disabled
-                tooltipText="Selbstkosten sind die Gesamtkosten (fixe + variable Kosten) pro Stück"
-              >
-                <Info color="primary" />
-              </ButtonWithTooltip>
-            </Stack>
+            {CreateSalesLabelGridItem(
+              "Selbstkosten",
+              "Selbstkosten sind die Gesamtkosten (fixe + variable Kosten) pro Stück"
+            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
@@ -158,7 +172,21 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography>Umsatz</Typography>
+            {CreateSalesLabelGridItem(
+              "Break-Even",
+              "Break-Even ist die Nummer von verkauften Produkten, die notwendig sind, um die Gesamtkosten (fixe + variable Kosten) zu decken"
+            )}
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <NumberInput
+              customAdornmentText={currency}
+              readonly
+              value={sales.breakEven.toFixed(FractionDigits)}
+              name="breakEven"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {CreateSalesLabelGridItem("Umsatz")}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
@@ -169,15 +197,10 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Stack direction="row" alignItems="center" spacing={2}>
-              <Typography>Deckungsbeitrag I</Typography>
-              <ButtonWithTooltip
-                disabled
-                tooltipText="Deckungsbeitrag I ergibt sich aus Umsatz - variable Kosten"
-              >
-                <Info color="primary" />
-              </ButtonWithTooltip>
-            </Stack>
+            {CreateSalesLabelGridItem(
+              "Deckungsbeitrag I",
+              "Deckungsbeitrag I ergibt sich aus Umsatz - variable Kosten"
+            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
@@ -188,7 +211,7 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography>Gewinn</Typography>
+            {CreateSalesLabelGridItem("Gewinn")}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput

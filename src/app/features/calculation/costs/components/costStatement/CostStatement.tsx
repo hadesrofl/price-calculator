@@ -14,6 +14,7 @@ interface CostStatementProps {
  */
 export default function CostStatement(props: CostStatementProps) {
   const { costs, currency, title } = props;
+  const FractionDigits = 2;
 
   return (
     <Grid item xs={12} sm={6}>
@@ -29,7 +30,7 @@ export default function CostStatement(props: CostStatementProps) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography>
-                {cost.value} {currency}
+                {cost.value.toFixed(FractionDigits)} {currency}
               </Typography>
             </Grid>
           </Grid>
@@ -44,7 +45,7 @@ export default function CostStatement(props: CostStatementProps) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography>
-            {calculateTotalCosts(costs)} {currency}
+            {calculateTotalCosts(costs).toFixed(FractionDigits)} {currency}
           </Typography>
         </Grid>
       </Grid>
