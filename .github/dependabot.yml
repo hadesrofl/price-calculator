@@ -6,3 +6,33 @@ updates:
       prefix: "deps: "
     schedule:
       interval: "weekly"
+    groups:
+      mui:
+        patterns:
+          - "@mui*"
+        update-types:
+          - "patch"
+      react:
+        patterns:
+          - "react*"
+          - "@types/react*"
+        update-types:
+          - "minor"
+          - "patch"
+      eslint:
+        patterns:
+          - "eslint*"
+        update-types:
+          - "patch"
+      emotion:
+        patterns:
+          - "@emotion*"
+        update-types:
+          - "patch"
+      joi:
+        patterns:
+          - "joi"
+          - "@types/joi"
+        update-types:
+          - "minor"
+          - "patch"
