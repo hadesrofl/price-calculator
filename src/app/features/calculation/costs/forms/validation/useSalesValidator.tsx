@@ -9,6 +9,10 @@ export const salesVolumeValidationSchema = Joi.number().positive();
  * The validation schema for price per unit
  */
 export const pricePerUnitValidationSchema = Joi.number().positive();
+/**
+ * The validation schema for discounts
+ */
+export const discountValidationSchema = Joi.number().min(0).max(100);
 
 /**
  * Creates a validator for {@link SalesForm} and checks the form fields and manages their errors states
@@ -18,6 +22,7 @@ export function useSalesValidator() {
   const [validationErrors, setValidationErrors] = useState({
     salesVolume: "",
     pricePerUnit: "",
+    discount: "",
   });
 
   const validate = (

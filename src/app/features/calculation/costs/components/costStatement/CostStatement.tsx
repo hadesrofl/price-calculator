@@ -1,8 +1,10 @@
-import { Divider, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import { Cost, calculateTotalCosts } from "../../types/Costs";
+import { Discount } from "../../types/Discount";
 
 interface CostStatementProps {
   costs: Cost[];
+  discount?: Discount;
   currency: string;
   title: string;
 }
@@ -13,8 +15,9 @@ interface CostStatementProps {
  * @returns {JSX.Element} A cost statement entry listing all giving costs
  */
 export default function CostStatement(props: CostStatementProps) {
-  const { costs, currency, title } = props;
+  const { costs, currency, discount, title } = props;
   const FractionDigits = 2;
+  const totalCosts = calculateTotalCosts(costs);
 
   return (
     <Grid item xs={12} sm={6}>
@@ -36,18 +39,49 @@ export default function CostStatement(props: CostStatementProps) {
           </Grid>
         );
       })}
-      <Grid item xs={12} sm={7}>
-        <Divider />
-      </Grid>
       <Grid container>
-        <Grid item xs={12} sm={6}>
-          <Typography>Summe</Typography>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography>
-            {calculateTotalCosts(costs).toFixed(FractionDigits)} {currency}
-          </Typography>
-        </Grid>
+        {discount !== undefined && discount.inPercent !== 0 ? (
+          <>
+            <Grid container key="Rabattaufschlag" marginBottom={1}>
+              <Grid item xs={12} sm={6}>
+                <Typography>Rabattaufschlag</Typography>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Typography>
+                  {discount.costPerUnit.toFixed(FractionDigits)} {currency}
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} sm={7}>
+              <Divider />
+            </Grid>
+            <Grid container>
+              <Grid item xs={12} sm={6}>
+                <Typography>Summe</Typography>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Typography>
+                  {(totalCosts + discount.costPerUnit).toFixed(FractionDigits)}{" "}
+                  {currency}
+                </Typography>
+              </Grid>
+            </Grid>
+          </>
+        ) : (
+          <>
+            <Grid item xs={12} sm={7}>
+              <Divider />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Typography>Summe</Typography>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Typography>
+                {totalCosts.toFixed(FractionDigits)} {currency}
+              </Typography>
+            </Grid>
+          </>
+        )}
       </Grid>
     </Grid>
   );

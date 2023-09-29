@@ -3,6 +3,7 @@ import { Stack, Box, Typography, Grid } from "@mui/material";
 import { Sales, calculateSales } from "../types/Sales";
 import NumberInput from "../components/inputs/NumberInput";
 import {
+  discountValidationSchema,
   pricePerUnitValidationSchema,
   salesVolumeValidationSchema,
   useSalesValidator,
@@ -11,8 +12,9 @@ import Info from "@mui/icons-material/Info";
 import DetailedCostStatement from "../components/costStatement/DetailedCostStatement";
 import useDesktopSize from "@/app/hooks/useDesktopSize";
 import ButtonWithTooltip from "../components/buttons/ButtonWithTooltip";
+import { Discount, calculateCostPerUnit } from "../types/Discount";
 
-function CreateSalesLabelGridItem(
+function createSalesLabelGridItem(
   labelText: string,
   tooltipText?: string
 ): JSX.Element {
@@ -59,7 +61,9 @@ export default function SalesForm(props: SalesFormProps) {
   const { validationErrors, validate } = useSalesValidator();
   const [volume, setVolume] = useState<number>(sales.volume);
   const [pricePerUnit, setPricePerUnit] = useState<number>(sales.pricePerUnit);
+  const [discount, setDiscount] = useState<Discount>(sales.discount);
   const title = "Umsatz & Gewinn";
+  const percentage = "%";
 
   const onSalesVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = validate(salesVolumeValidationSchema, event);
@@ -69,15 +73,28 @@ export default function SalesForm(props: SalesFormProps) {
   const OnPricePerUnitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = validate(pricePerUnitValidationSchema, event);
     setPricePerUnit(value);
+    setDiscount({
+      ...discount,
+      costPerUnit: calculateCostPerUnit(value, discount.inPercent),
+    });
+  };
+
+  const OnDiscountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = validate(discountValidationSchema, event);
+    setDiscount({
+      inPercent: value,
+      costPerUnit: calculateCostPerUnit(pricePerUnit, value),
+    });
   };
 
   const updateSales = useCallback(
     (
       volume: number = sales.volume,
-      pricePerUnit: number = sales.pricePerUnit
+      pricePerUnit: number = sales.pricePerUnit,
+      discount: Discount = sales.discount
     ) => {
       onSalesChanged(
-        calculateSales({ ...sales, volume, pricePerUnit, currency })
+        calculateSales({ ...sales, volume, pricePerUnit, discount, currency })
       );
     },
     [currency, onSalesChanged, sales]
@@ -104,9 +121,10 @@ export default function SalesForm(props: SalesFormProps) {
     const timeoutId = setTimeout(() => {
       if (
         validationErrors.pricePerUnit === "" &&
-        validationErrors.salesVolume === ""
+        validationErrors.salesVolume === "" &&
+        validationErrors.discount === ""
       )
-        updateSales(volume, pricePerUnit);
+        updateSales(volume, pricePerUnit, discount);
     }, timeoutInMs);
     return () => clearTimeout(timeoutId);
   }, [
@@ -115,6 +133,8 @@ export default function SalesForm(props: SalesFormProps) {
     updateSales,
     validationErrors.pricePerUnit,
     validationErrors.salesVolume,
+    validationErrors.discount,
+    discount,
   ]);
 
   return (
@@ -123,7 +143,7 @@ export default function SalesForm(props: SalesFormProps) {
       <Stack direction={isDesktopSize ? "row" : "column"} spacing={2}>
         <Grid alignItems="center" container rowSpacing={2}>
           <Grid item xs={12} sm={6}>
-            {CreateSalesLabelGridItem("Absatzmenge")}
+            {createSalesLabelGridItem("Absatzmenge")}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
@@ -140,7 +160,7 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            {CreateSalesLabelGridItem("Stückpreis")}
+            {createSalesLabelGridItem("Stückpreis")}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
@@ -158,7 +178,28 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            {CreateSalesLabelGridItem(
+            {createSalesLabelGridItem(
+              "Rabattaufschlag",
+              "Berechnet sich aus dem Rabattaufschlag in Prozent und dem Stückpreis"
+            )}
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <NumberInput
+              customAdornmentText={percentage}
+              onlyPositiveValues
+              value={discount.inPercent}
+              name="discount"
+              onChange={OnDiscountChange}
+              error={validationErrors.discount !== "" ? true : false}
+              helperText={
+                validationErrors.discount !== ""
+                  ? validationErrors.discount
+                  : ""
+              }
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {createSalesLabelGridItem(
               "Selbstkosten",
               "Selbstkosten sind die Gesamtkosten (fixe + variable Kosten) pro Stück"
             )}
@@ -172,7 +213,7 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            {CreateSalesLabelGridItem(
+            {createSalesLabelGridItem(
               "Break-Even",
               "Break-Even ist die Nummer von verkauften Produkten, die notwendig sind, um die Gesamtkosten (fixe + variable Kosten) zu decken"
             )}
@@ -186,7 +227,10 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            {CreateSalesLabelGridItem("Umsatz")}
+            {createSalesLabelGridItem(
+              "Umsatz",
+              "Berechnet sich anhand der Absatzmenge, dem Stückpreis und abzüglich des Rabattaufschlags je Stück"
+            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
@@ -197,7 +241,7 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            {CreateSalesLabelGridItem(
+            {createSalesLabelGridItem(
               "Deckungsbeitrag I",
               "Deckungsbeitrag I ergibt sich aus Umsatz - variable Kosten"
             )}
@@ -211,7 +255,7 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            {CreateSalesLabelGridItem("Gewinn")}
+            {createSalesLabelGridItem("Gewinn")}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
@@ -222,7 +266,11 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12}>
-            <DetailedCostStatement costs={sales.costs} currency={currency} />
+            <DetailedCostStatement
+              costs={sales.costs}
+              discount={sales.discount}
+              currency={currency}
+            />
           </Grid>
         </Grid>
       </Stack>
