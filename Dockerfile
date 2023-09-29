@@ -16,7 +16,6 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN rm next.config.js && mv next.config.docker.js next.config.js
 
 RUN npm run build
 
