@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const packageJson = require('./package.json');
+const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 
 const nextConfig = {
     env: {
@@ -8,4 +9,13 @@ const nextConfig = {
     output: 'export',
 }
 
-module.exports = nextConfig
+module.exports = (phase, { }) => {
+    if (phase === PHASE_DEVELOPMENT_SERVER) return {
+        images: {
+            unoptimized: true
+        }, 
+        ...nextConfig
+    }
+
+    return nextConfig;
+}
