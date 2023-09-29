@@ -1,4 +1,5 @@
 import { Costs, calculateTotalCosts, createEmptyCosts } from "./Costs";
+import { createEmptyDiscount, Discount } from "./Discount";
 
 /**
  * The definition of sales which contain the calculation of costs, sales volumes and pricing
@@ -7,6 +8,7 @@ export type Sales = {
   costs: Costs;
   costPrice: number;
   pricePerUnit: number;
+  discount: Discount;
   breakEven: number;
   volume: number;
   revenue: number;
@@ -23,6 +25,7 @@ export type Sales = {
 export function createEmptySales(currency: string) {
   return {
     costs: createEmptyCosts(),
+    discount: createEmptyDiscount(),
     costPrice: 0,
     pricePerUnit: 0,
     breakEven: 0,
@@ -44,15 +47,26 @@ export function calculateSales(sales: Sales): Sales {
   const totalVariableCosts =
     calculateTotalCosts(sales.costs.variableCosts) * sales.volume;
   const costPrice = !Number.isFinite(
-    (totalFixCosts + totalVariableCosts) / sales.volume
+    (totalFixCosts +
+      totalVariableCosts +
+      sales.discount.costPerUnit * sales.volume) /
+      sales.volume
   )
     ? 0
-    : (totalFixCosts + totalVariableCosts) / sales.volume;
-  const totalCosts = totalFixCosts + totalVariableCosts;
+    : (totalFixCosts +
+        totalVariableCosts +
+        sales.discount.costPerUnit * sales.volume) /
+      sales.volume;
+  const totalCosts =
+    totalFixCosts +
+    totalVariableCosts +
+    sales.discount.costPerUnit * sales.volume;
   const breakEven = !Number.isFinite(totalCosts / sales.pricePerUnit)
     ? 0
     : totalCosts / sales.pricePerUnit;
-  const revenue = sales.pricePerUnit * sales.volume;
+  const revenue =
+    sales.pricePerUnit * sales.volume -
+    sales.discount.costPerUnit * sales.volume;
   const unitContributionMargin = revenue - totalVariableCosts;
   const profit = unitContributionMargin - totalFixCosts;
 

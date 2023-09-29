@@ -8,12 +8,14 @@ import {
 } from "@mui/material";
 import CostStatement from "./CostStatement";
 import { Costs, calculateTotalCosts } from "../../types/Costs";
+import { Discount } from "../../types/Discount";
 
 /**
  * An interface for the properties of {@link DetailedCostStatement}
  */
 export interface DetailedCostStatementProps {
   costs: Costs;
+  discount: Discount;
   currency: string;
 }
 
@@ -25,7 +27,7 @@ export interface DetailedCostStatementProps {
 export default function DetailedCostStatement(
   props: DetailedCostStatementProps
 ) {
-  const { costs, currency } = props;
+  const { costs, discount, currency } = props;
 
   return (
     <Accordion
@@ -46,6 +48,7 @@ export default function DetailedCostStatement(
           />
           <CostStatement
             costs={costs.variableCosts}
+            discount={discount}
             currency={currency}
             title="Variable Kosten"
           />

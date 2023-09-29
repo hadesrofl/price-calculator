@@ -21,6 +21,7 @@ export function useCostValidator() {
     schema: Joi.NumberSchema | Joi.StringSchema,
     event: React.ChangeEvent<HTMLInputElement>
   ): { valid: boolean; value: number | string } => {
+    if (event.target.value === "") return { valid: true, value: 0 };
     var validationResult = schema.validate(event.target.value);
     if (validationResult.error) {
       setValidationErrors({
