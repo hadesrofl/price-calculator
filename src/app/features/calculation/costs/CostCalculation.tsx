@@ -23,6 +23,8 @@ import {
 } from "./types/Sales";
 import ExportButton from "./components/buttons/ExportButton";
 import ImportButton from "./components/buttons/ImportButton";
+import { useTranslation } from "@/app/i18n/i18next";
+import { TranslationsCostCalculation } from "@/app/i18n/locales/translationNamespaces";
 
 enum CalculatorTabs {
   FixCosts,
@@ -43,6 +45,7 @@ export function CostCalculation(): JSX.Element {
   );
   const [sales, setSales] = useState<Sales>(createEmptySales(currency));
   const theme = useTheme();
+  const { t } = useTranslation(TranslationsCostCalculation);
   const isDesktopSize = useMediaQuery(theme.breakpoints.up("sm"));
 
   const changeSelectedTab = (_: React.SyntheticEvent, newValue: number) => {
@@ -92,22 +95,22 @@ export function CostCalculation(): JSX.Element {
           variant="scrollable"
           scrollButtons="auto"
           allowScrollButtonsMobile
-          aria-label="basic tabs example"
+          aria-label="cost calculation tabs"
         >
           <Tab
             icon={<TextSnippetIcon />}
-            label={isDesktopSize ? "Fixkosten" : ""}
-            aria-label="Fixkosten"
+            label={isDesktopSize ? t("FixedCosts") : ""}
+            aria-label={t("FixedCosts")}
           />
           <Tab
             icon={<AutoStoriesIcon />}
-            label={isDesktopSize ? "Variable Kosten" : ""}
-            aria-label="Variable Kosten"
+            label={isDesktopSize ? t("VariableCosts") : ""}
+            aria-label={t("VariableCosts")}
           />
           <Tab
             icon={<EuroIcon />}
-            label={isDesktopSize ? "Umsatz & Gewinn" : ""}
-            aria-label="Umsatz & Gewinn"
+            label={isDesktopSize ? t("SalesAndProfit") : ""}
+            aria-label={t("SalesAndProfit")}
           />
         </Tabs>
         <ImportButton onUpload={onImport} />
@@ -119,7 +122,7 @@ export function CostCalculation(): JSX.Element {
         <CostForm
           costs={sales.costs.fixCosts}
           onCostChanged={onFixCostsChanged}
-          title="Fixkosten"
+          title={t("FixedCosts")}
           currency={currency}
         />
       </CalculationTabPanel>
@@ -130,7 +133,7 @@ export function CostCalculation(): JSX.Element {
         <CostForm
           costs={sales.costs.variableCosts}
           onCostChanged={onVariableCostsChanged}
-          title="Variable Kosten"
+          title={t("VariableCosts")}
           currency={currency}
         />
       </CalculationTabPanel>

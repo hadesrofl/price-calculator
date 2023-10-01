@@ -1,0 +1,9 @@
+{
+  "Title": "Cost Statement",
+  "FixedCosts": "Fixed Costs",
+  "VariableCosts": "Variable Costs",
+  "Labels": {
+    "Discount": "Discount Cost",
+    "Sum": "Sum"
+  }
+}
