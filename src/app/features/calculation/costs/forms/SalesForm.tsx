@@ -105,15 +105,18 @@ export default function SalesForm(props: SalesFormProps) {
   useEffect(() => {
     if (
       validationErrors.salesVolume === "" &&
-      validationErrors.pricePerUnit !== ""
+      validationErrors.pricePerUnit === "" &&
+      validationErrors.discount === ""
     ) {
       updateSales(sales.volume, sales.pricePerUnit);
       setVolume(sales.volume);
       setPricePerUnit(sales.pricePerUnit);
+      setDiscount(sales.discount);
     }
   }, [
     sales,
     updateSales,
+    validationErrors.discount,
     validationErrors.pricePerUnit,
     validationErrors.salesVolume,
   ]);
