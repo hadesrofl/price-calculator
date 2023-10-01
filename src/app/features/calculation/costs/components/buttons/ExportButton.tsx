@@ -1,7 +1,9 @@
 import useDesktopSize from "@/app/hooks/useDesktopSize";
+import { TranslationsButtons } from "@/app/i18n/locales/translationNamespaces";
 import FileDownload from "@mui/icons-material/FileDownload";
 import { Button } from "@mui/material";
 import { useState, useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ExportButtonProps {
   exportData: Object;
@@ -17,6 +19,7 @@ export default function ExportButton(props: ExportButtonProps): JSX.Element {
   const { exportData, exportFileName } = props;
   const isDesktopSize = useDesktopSize();
   const [exportFile, setExportFile] = useState<string>("");
+  const { t } = useTranslation(TranslationsButtons);
 
   const exportPriceCalculation = useCallback(() => {
     const jsonString = `Data:text/json;charset=utf-8,${encodeURIComponent(
@@ -37,7 +40,7 @@ export default function ExportButton(props: ExportButtonProps): JSX.Element {
       download={exportFileName}
       color="inherit"
     >
-      {isDesktopSize ? "Export" : ""}
+      {isDesktopSize ? t("Export") : ""}
     </Button>
   );
 }

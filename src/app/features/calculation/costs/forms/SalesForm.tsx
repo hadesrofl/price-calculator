@@ -13,6 +13,8 @@ import DetailedCostStatement from "../components/costStatement/DetailedCostState
 import useDesktopSize from "@/app/hooks/useDesktopSize";
 import ButtonWithTooltip from "../components/buttons/ButtonWithTooltip";
 import { Discount, calculateCostPerUnit } from "../types/Discount";
+import { useTranslation } from "@/app/i18n/i18next";
+import { TranslationsSalesForm } from "@/app/i18n/locales/translationNamespaces";
 
 function createSalesLabelGridItem(
   labelText: string,
@@ -62,7 +64,7 @@ export default function SalesForm(props: SalesFormProps) {
   const [volume, setVolume] = useState<number>(sales.volume);
   const [pricePerUnit, setPricePerUnit] = useState<number>(sales.pricePerUnit);
   const [discount, setDiscount] = useState<Discount>(sales.discount);
-  const title = "Umsatz & Gewinn";
+  const { t } = useTranslation(TranslationsSalesForm);
   const percentage = "%";
 
   const onSalesVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -139,16 +141,20 @@ export default function SalesForm(props: SalesFormProps) {
 
   return (
     <Stack alignItems="left">
-      {isDesktopSize ? <Box /> : <Typography variant="h5">{title}</Typography>}
+      {isDesktopSize ? (
+        <Box />
+      ) : (
+        <Typography variant="h5">{t("Title")}</Typography>
+      )}
       <Stack direction={isDesktopSize ? "row" : "column"} spacing={2}>
         <Grid alignItems="center" container rowSpacing={2}>
           <Grid item xs={12} sm={6}>
-            {createSalesLabelGridItem("Absatzmenge")}
+            {createSalesLabelGridItem(t("Labels.SalesVolume"))}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
               value={volume}
-              customAdornmentText="Stk."
+              customAdornmentText={t("Adornment.Pieces")}
               name="salesVolume"
               onChange={onSalesVolumeChange}
               error={validationErrors.salesVolume !== "" ? true : false}
@@ -160,7 +166,7 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            {createSalesLabelGridItem("Stückpreis")}
+            {createSalesLabelGridItem(t("Labels.PricePerUnit"))}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
@@ -179,8 +185,8 @@ export default function SalesForm(props: SalesFormProps) {
           </Grid>
           <Grid item xs={12} sm={6}>
             {createSalesLabelGridItem(
-              "Rabattaufschlag",
-              "Berechnet sich aus dem Rabattaufschlag in Prozent und dem Stückpreis"
+              t("Labels.Discount"),
+              t("Tooltips.Discount")
             )}
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -200,8 +206,8 @@ export default function SalesForm(props: SalesFormProps) {
           </Grid>
           <Grid item xs={12} sm={6}>
             {createSalesLabelGridItem(
-              "Selbstkosten",
-              "Selbstkosten sind die Gesamtkosten (fixe + variable Kosten) pro Stück"
+              t("Labels.OwnCosts"),
+              t("Tooltips.OwnCosts")
             )}
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -214,8 +220,8 @@ export default function SalesForm(props: SalesFormProps) {
           </Grid>
           <Grid item xs={12} sm={6}>
             {createSalesLabelGridItem(
-              "Break-Even",
-              "Break-Even ist die Nummer von verkauften Produkten, die notwendig sind, um die Gesamtkosten (fixe + variable Kosten) zu decken"
+              t("Labels.BreakEven"),
+              t("Tooltips.BreakEven")
             )}
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -228,8 +234,8 @@ export default function SalesForm(props: SalesFormProps) {
           </Grid>
           <Grid item xs={12} sm={6}>
             {createSalesLabelGridItem(
-              "Umsatz",
-              "Berechnet sich anhand der Absatzmenge, dem Stückpreis und abzüglich des Rabattaufschlags je Stück"
+              t("Labels.Revenue"),
+              t("Tooltips.Revenue")
             )}
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -242,8 +248,8 @@ export default function SalesForm(props: SalesFormProps) {
           </Grid>
           <Grid item xs={12} sm={6}>
             {createSalesLabelGridItem(
-              "Deckungsbeitrag I",
-              "Deckungsbeitrag I ergibt sich aus Umsatz - variable Kosten"
+              t("Labels.UnitContributionMargin"),
+              t("Tooltips.UnitContributionMargin")
             )}
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -255,7 +261,7 @@ export default function SalesForm(props: SalesFormProps) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            {createSalesLabelGridItem("Gewinn")}
+            {createSalesLabelGridItem(t("Labels.Profit"))}
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput

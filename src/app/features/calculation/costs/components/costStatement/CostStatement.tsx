@@ -1,6 +1,8 @@
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import { Cost, calculateTotalCosts } from "../../types/Costs";
 import { Discount } from "../../types/Discount";
+import { useTranslation } from "@/app/i18n/i18next";
+import { TranslationsCostStatement } from "@/app/i18n/locales/translationNamespaces";
 
 interface CostStatementProps {
   costs: Cost[];
@@ -16,6 +18,7 @@ interface CostStatementProps {
  */
 export default function CostStatement(props: CostStatementProps) {
   const { costs, currency, discount, title } = props;
+  const { t } = useTranslation(TranslationsCostStatement);
   const FractionDigits = 2;
   const totalCosts = calculateTotalCosts(costs);
 
@@ -42,9 +45,9 @@ export default function CostStatement(props: CostStatementProps) {
       <Grid container>
         {discount !== undefined && discount.inPercent !== 0 ? (
           <>
-            <Grid container key="Rabattaufschlag" marginBottom={1}>
+            <Grid container key="Discount" marginBottom={1}>
               <Grid item xs={12} sm={6}>
-                <Typography>Rabattaufschlag</Typography>
+                <Typography>{t("Labels.Discount")}</Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography>
@@ -57,7 +60,7 @@ export default function CostStatement(props: CostStatementProps) {
             </Grid>
             <Grid container>
               <Grid item xs={12} sm={6}>
-                <Typography>Summe</Typography>
+                <Typography>{t("Labels.Sum")}</Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography>
@@ -73,7 +76,7 @@ export default function CostStatement(props: CostStatementProps) {
               <Divider />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Typography>Summe</Typography>
+              <Typography>{t("Labels.Sum")}</Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography>

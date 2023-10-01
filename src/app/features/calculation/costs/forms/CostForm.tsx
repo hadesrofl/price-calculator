@@ -17,6 +17,8 @@ import {
 import Delete from "@mui/icons-material/Delete";
 import AddCircle from "@mui/icons-material/AddCircle";
 import useDesktopSize from "@/app/hooks/useDesktopSize";
+import { useTranslation } from "@/app/i18n/i18next";
+import { TranslationsCostForm } from "@/app/i18n/locales/translationNamespaces";
 
 /**
  * Interface for the properties of the {@link CostForm} like a handler in case cost changed
@@ -38,6 +40,7 @@ export default function CostForm(props: CostFormProps): JSX.Element {
   const isDesktopSize = useDesktopSize();
   const { textFieldSx } = useTextFieldStyles();
   const { validate, hasError, getError } = useCostValidator();
+  const { t } = useTranslation(TranslationsCostForm);
 
   const onLabelChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = validate(labelSchema, event);
@@ -76,7 +79,7 @@ export default function CostForm(props: CostFormProps): JSX.Element {
                     variant="filled"
                     size="small"
                     type="text"
-                    placeholder="Kostenname"
+                    placeholder={t("CostLabel_Placeholder")}
                     value={cost.label}
                     name={`${idx.toString()}_label`}
                     inputProps={{ style: textFieldSx }}

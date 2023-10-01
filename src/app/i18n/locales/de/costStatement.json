@@ -1,0 +1,9 @@
+{
+  "Title": "Kostenaufstellung",
+  "FixedCosts": "Fixe Kosten",
+  "VariableCosts": "Variable Kosten",
+  "Labels": {
+    "Discount": "Rabattaufschlag",
+    "Sum": "Summe"
+  }
+}

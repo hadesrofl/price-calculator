@@ -2,6 +2,8 @@ import CloudUpload from "@mui/icons-material/CloudUpload";
 import { Button } from "@mui/material";
 import HiddenInputField from "../inputs/HiddenInputField";
 import useDesktopSize from "@/app/hooks/useDesktopSize";
+import { useTranslation } from "@/app/i18n/i18next";
+import { TranslationsButtons } from "@/app/i18n/locales/translationNamespaces";
 
 export interface ImportButtonProps {
   onUpload: (fileContent: string) => void;
@@ -15,6 +17,7 @@ export interface ImportButtonProps {
 export default function ImportButton(props: ImportButtonProps) {
   const { onUpload } = props;
   const isDesktopSize = useDesktopSize();
+  const { t } = useTranslation(TranslationsButtons);
 
   const onImportFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (
@@ -38,7 +41,7 @@ export default function ImportButton(props: ImportButtonProps) {
       aria-label="Import"
       color="inherit"
     >
-      {isDesktopSize ? "Import" : ""}
+      {isDesktopSize ? t("Import") : ""}
       <HiddenInputField type="file" onChange={onImportFile} />
     </Button>
   );

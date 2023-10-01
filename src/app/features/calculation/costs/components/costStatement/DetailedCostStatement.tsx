@@ -9,6 +9,8 @@ import {
 import CostStatement from "./CostStatement";
 import { Costs, calculateTotalCosts } from "../../types/Costs";
 import { Discount } from "../../types/Discount";
+import { useTranslation } from "@/app/i18n/i18next";
+import { TranslationsCostStatement } from "@/app/i18n/locales/translationNamespaces";
 
 /**
  * An interface for the properties of {@link DetailedCostStatement}
@@ -28,6 +30,7 @@ export default function DetailedCostStatement(
   props: DetailedCostStatementProps
 ) {
   const { costs, discount, currency } = props;
+  const { t } = useTranslation(TranslationsCostStatement);
 
   return (
     <Accordion
@@ -36,21 +39,21 @@ export default function DetailedCostStatement(
         calculateTotalCosts(costs.variableCosts) === 0
       }
     >
-      <AccordionSummary expandIcon={<ExpandMore />} id="kostenaufstellung">
-        <Typography variant="subtitle1">Kostenaufstellung</Typography>
+      <AccordionSummary expandIcon={<ExpandMore />} id="costStatement">
+        <Typography variant="subtitle1">{t("Title")}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Grid container spacing={2}>
           <CostStatement
             costs={costs.fixCosts}
             currency={currency}
-            title="Fixkosten"
+            title={t("FixedCosts")}
           />
           <CostStatement
             costs={costs.variableCosts}
             discount={discount}
             currency={currency}
-            title="Variable Kosten"
+            title={t("VariableCosts")}
           />
         </Grid>
       </AccordionDetails>

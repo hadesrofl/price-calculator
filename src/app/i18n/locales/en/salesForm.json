@@ -1,0 +1,23 @@
+{
+  "Title": "Sales & Profit",
+  "Adornment": {
+    "Pieces": "pcs."
+  },
+  "Labels": {
+    "SalesVolume": "Sales Volume",
+    "PricePerUnit": "Price per Unit",
+    "Discount": "Discount",
+    "OwnCosts": "Own Costs",
+    "BreakEven": "Break Even",
+    "Revenue": "Revenue",
+    "UnitContributionMargin": "Unit Contribution Margin",
+    "Profit": "Profit"
+  },
+  "Tooltips": {
+    "Discount": "Calculated from Discount in percent and Price per Unit",
+    "OwnCosts": "Own Costs are the total costs (fixed and variable) per piece",
+    "BreakEven": "Break Even is the necessary number of sold products to cover total costs (fixed and variable)",
+    "Revenue": "Calculated from the Sales Volume and Price per Unit subtracted by the Discount per unit.",
+    "UnitContributionMargin": "Unit Contribution Margin is calculated from Revenue - Variable Costs"
+  }
+}
