@@ -50,6 +50,7 @@ export function useTranslation(namespace: string = DefaultNS) {
   useEffect(() => {
     if (cookies.Language && Languages.includes(cookies.Language))
       i18n.changeLanguage(cookies.Language);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [activeLanguage, setActivelanguage] = useState(i18n.resolvedLanguage);
