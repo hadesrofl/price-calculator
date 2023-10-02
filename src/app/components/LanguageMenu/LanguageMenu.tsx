@@ -28,7 +28,8 @@ export default function LanguageMenu() {
   };
 
   const handleClose = (event: React.MouseEvent<HTMLLIElement>) => {
-    i18n.changeLanguage(event.currentTarget.id);
+    if (event.currentTarget.id !== undefined && event.currentTarget.id !== "")
+      i18n.changeLanguage(event.currentTarget.id);
     setAnchorElement(null);
   };
 
@@ -82,16 +83,6 @@ export default function LanguageMenu() {
             </MenuItem>
           );
         })}
-
-        {/* <MenuItem id="en" onClick={handleClose}>
-          <ListItem>
-            <LanguageItem
-              languageIsoCode={"gb"}
-              languageTranslationKey={"English"}
-            />
-            {setCheckmarkOnSelectedLanguageItem("en")}
-          </ListItem>
-        </MenuItem> */}
       </Menu>
     </Box>
   );
