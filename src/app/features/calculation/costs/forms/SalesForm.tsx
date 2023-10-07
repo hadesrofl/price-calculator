@@ -66,6 +66,7 @@ export default function SalesForm(props: SalesFormProps) {
   const [discount, setDiscount] = useState<Discount>(sales.discount);
   const { t } = useTranslation(TranslationsSalesForm);
   const percentage = "%";
+  const pieces = t("Adornment.Pieces");
 
   const onSalesVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = validate(salesVolumeValidationSchema, event);
@@ -157,7 +158,7 @@ export default function SalesForm(props: SalesFormProps) {
           <Grid item xs={12} sm={6}>
             <NumberInput
               value={volume}
-              customAdornmentText={t("Adornment.Pieces")}
+              customAdornmentText={pieces}
               name="salesVolume"
               onChange={onSalesVolumeChange}
               error={validationErrors.salesVolume !== "" ? true : false}
@@ -229,7 +230,7 @@ export default function SalesForm(props: SalesFormProps) {
           </Grid>
           <Grid item xs={12} sm={6}>
             <NumberInput
-              customAdornmentText={currency}
+              customAdornmentText={pieces}
               readonly
               value={sales.breakEven.toFixed(FractionDigits)}
               name="breakEven"
