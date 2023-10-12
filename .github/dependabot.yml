@@ -5,7 +5,7 @@ updates:
     commit-message:
       prefix: "deps: "
     schedule:
-      interval: "weekly"
+      interval: weekly
     groups:
       mui:
         patterns:
@@ -33,6 +33,56 @@ updates:
         patterns:
           - "joi"
           - "@types/joi"
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: nuget
+    directory: "/backend/"
+    commit-message:
+      prefix: "deps: "
+    schedule:
+      interval: weekly
+    groups:
+      ef:
+        patterns:
+          - "Microsoft.EntityFrameworkCore*"
+        update-types:
+          - "minor"
+          - "patch"
+      tests:
+        patterns:
+          - "xunit*"
+          - "Microsoft.NET.Test*"
+          - "Microsoft.AspNetCore.Mvc.Testing"
+          - "FluentAssertions"
+          - "coverlet.collector"
+          - "NSubstitute"
+          - "ReportGenerator"
+        update-types:
+          - "minor"
+          - "patch"
+      autofac:
+        patterns:
+          - "Autofac*"
+          - "MediatR.Extensions.Autofac*"
+        update-types:
+          - "minor"
+          - "patch"
+      endpoints:
+        patterns:
+          - "FastEndpoints*"
+        update-types:
+          - "minor"
+          - "patch"
+      swashbuckle:
+        patterns:
+          - "Swashbuckle*"
+        update-types:
+          - "minor"
+          - "patch"
+      logging:
+        patterns:
+          - "Serilog*"
         update-types:
           - "minor"
           - "patch"
