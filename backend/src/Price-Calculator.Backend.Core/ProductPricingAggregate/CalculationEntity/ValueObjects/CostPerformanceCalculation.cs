@@ -1,6 +1,4 @@
-﻿using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity;
-
-namespace Price;
+﻿namespace Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 
 /// <summary>
 ///   Cost Performance Calculation for a <see cref="Calculation" />.

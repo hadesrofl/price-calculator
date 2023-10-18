@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity;
 using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.Factory;
+using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 using Xunit;
 
 namespace Price;
@@ -48,8 +49,8 @@ public class CalculationConstructor
   {
     return new List<object[]>
     {
-      new object[] { 100, new Amount(new decimal(2.37), new Currency("Euro", "€")) },
-      new object[] { -100, new Amount(new decimal(2.37), new Currency("Euro", "€")) }
+      new object[] { 100, new Amount(new decimal(2.37), new Currency("EUR")) },
+      new object[] { -100, new Amount(new decimal(2.37), new Currency("EUR")) }
     };
   }
 
@@ -75,7 +76,7 @@ public class CalculationConstructor
 
   public static IEnumerable<object[]> GetCreatedCalculationDataWithCosts()
   {
-    var euroCurrency = new Currency("Euro", "€");
+    var euroCurrency = new Currency("EUR");
     return new List<object[]>
     {
       new object[]

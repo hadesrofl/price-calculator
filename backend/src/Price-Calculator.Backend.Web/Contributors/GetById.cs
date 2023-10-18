@@ -1,10 +1,9 @@
-﻿using FastEndpoints;
+﻿using Ardalis.Result;
+using FastEndpoints;
 using MediatR;
-using Ardalis.Result;
-using Price_Calculator.Backend.Web.Endpoints.ContributorEndpoints;
 using Price_Calculator.Backend.UseCases.Contributors.Get;
 
-namespace Price_Calculator.Backend.Web.ContributorEndpoints;
+namespace Price_Calculator.Backend.Web.Contributors;
 
 /// <summary>
 /// Get a Contributor by integer ID.

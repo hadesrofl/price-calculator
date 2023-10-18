@@ -1,10 +1,9 @@
-﻿using FastEndpoints;
-using Ardalis.Result;
+﻿using Ardalis.Result;
+using FastEndpoints;
 using MediatR;
-using Price_Calculator.Backend.Web.Endpoints.ContributorEndpoints;
 using Price_Calculator.Backend.UseCases.Contributors.Delete;
 
-namespace Price_Calculator.Backend.Web.ContributorEndpoints;
+namespace Price_Calculator.Backend.Web.Contributors;
 
 /// <summary>
 /// Delete a Contributor.

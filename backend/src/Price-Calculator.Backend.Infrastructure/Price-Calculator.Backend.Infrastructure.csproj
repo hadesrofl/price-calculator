@@ -4,6 +4,8 @@
     <PropertyGroup>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <AssemblyName>Price_Calculator.Backend.Infrastructure</AssemblyName>
+        <RootNamespace>Price_Calculator.Backend.Infrastructure</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,6 +13,8 @@
         <PackageReference Include="Ardalis.Specification.EntityFrameworkCore"/>
         <PackageReference Include="Autofac"/>
         <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
+        <PackageReference Include="AutoMapper" />
+        <PackageReference Include="AutoMapper.Contrib.Autofac.DependencyInjection" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" PrivateAssets="all"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>

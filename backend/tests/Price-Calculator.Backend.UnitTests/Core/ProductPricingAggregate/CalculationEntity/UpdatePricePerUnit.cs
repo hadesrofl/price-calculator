@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity;
 using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.Factory;
+using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 using Xunit;
 
 namespace Price;
@@ -21,7 +22,7 @@ public class UpdatePricePerUnit
 
   public static IEnumerable<object[]> GetUpdatePriceData()
   {
-    var euro = new Currency("Euro", "€");
+    var euro = new Currency("EUR");
     return new List<object[]>
     {
       new object[]

@@ -1,9 +1,8 @@
 ﻿using FastEndpoints;
 using MediatR;
-using Price_Calculator.Backend.Web.Endpoints.ContributorEndpoints;
 using Price_Calculator.Backend.UseCases.Contributors.List;
 
-namespace Price_Calculator.Backend.Web.ContributorEndpoints;
+namespace Price_Calculator.Backend.Web.Contributors;
 
 /// <summary>
 /// List all Contributors

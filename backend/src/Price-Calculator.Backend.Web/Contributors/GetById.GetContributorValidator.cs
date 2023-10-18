@@ -1,7 +1,7 @@
 ﻿using FastEndpoints;
 using FluentValidation;
 
-namespace Price_Calculator.Backend.Web.Endpoints.ContributorEndpoints;
+namespace Price_Calculator.Backend.Web.Contributors;
 
 /// <summary>
 /// See: https://fast-endpoints.com/docs/validation

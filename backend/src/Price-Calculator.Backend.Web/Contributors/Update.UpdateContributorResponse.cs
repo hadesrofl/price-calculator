@@ -1,6 +1,4 @@
-﻿using Price_Calculator.Backend.Web.ContributorEndpoints;
-
-namespace Price_Calculator.Backend.Web.Endpoints.ContributorEndpoints;
+﻿namespace Price_Calculator.Backend.Web.Contributors;
 
 public class UpdateContributorResponse
 {

@@ -1,15 +1,14 @@
 ﻿using Ardalis.ListStartupServices;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using FastEndpoints;
+using FastEndpoints.Swagger;
+using Microsoft.EntityFrameworkCore;
 using Price_Calculator.Backend.Core;
 using Price_Calculator.Backend.Infrastructure;
 using Price_Calculator.Backend.Infrastructure.Data;
 using Price_Calculator.Backend.Web;
-using FastEndpoints;
-using FastEndpoints.Swagger;
-using FastEndpoints.ApiExplorer;
 using Serilog;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,7 +52,7 @@ builder.Services.Configure<ServiceConfig>(config =>
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
     containerBuilder.RegisterModule(new DefaultCoreModule());
-    containerBuilder.RegisterModule(new AutofacInfrastructureModule(builder.Environment.IsDevelopment()));
+    containerBuilder.RegisterModule(new AutofacInfrastructureModule(builder.Environment.IsDevelopment(), typeof(Price_Calculator.Backend.Web.Program).Assembly));
 });
 
 var app = builder.Build();
@@ -91,7 +90,7 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        var logger = services.GetRequiredService<ILogger<Program>>();
+        var logger = services.GetRequiredService<ILogger<Price_Calculator.Backend.Web.Program>>();
         logger.LogError(ex, "An error occurred seeding the DB. {exceptionMessage}", ex.Message);
     }
 }
@@ -99,6 +98,9 @@ using (var scope = app.Services.CreateScope())
 app.Run();
 
 // Make the implicit Program.cs class public, so integration tests can reference the correct assembly for host building
-public partial class Program
+namespace Price_Calculator.Backend.Web
 {
+  public partial class Program
+  {
+  }
 }

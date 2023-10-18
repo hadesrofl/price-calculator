@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity;
+using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 using Xunit;
 
 namespace Price;
@@ -21,7 +22,7 @@ public class ApplyDiscount
 
   public static IEnumerable<object[]> GetApplyDiscountData()
   {
-    Currency euro = new("Euro", "€");
+    Currency euro = new("EUR");
     return new List<object[]>
     {
       new object[] { new Cost("Distribution Discount", 45, euro, CostType.Discount), new Amount(8, euro), 3.6 }

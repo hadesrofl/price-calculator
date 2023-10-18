@@ -1,7 +1,6 @@
 ﻿using Ardalis.HttpClientTestExtensions;
 using Price_Calculator.Backend.Web;
-using Price_Calculator.Backend.Web.ContributorEndpoints;
-using Price_Calculator.Backend.Web.Endpoints.ContributorEndpoints;
+using Price_Calculator.Backend.Web.Contributors;
 using Xunit;
 
 namespace Price_Calculator.Backend.FunctionalTests.ApiEndpoints;

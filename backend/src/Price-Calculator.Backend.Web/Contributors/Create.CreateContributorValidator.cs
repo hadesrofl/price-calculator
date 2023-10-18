@@ -1,8 +1,8 @@
-﻿using Price_Calculator.Backend.Infrastructure.Data.Config;
-using FastEndpoints;
+﻿using FastEndpoints;
 using FluentValidation;
+using Price_Calculator.Backend.Infrastructure.Data.Config;
 
-namespace Price_Calculator.Backend.Web.Endpoints.ContributorEndpoints;
+namespace Price_Calculator.Backend.Web.Contributors;
 
 /// <summary>
 /// See: https://fast-endpoints.com/docs/validation

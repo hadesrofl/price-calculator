@@ -8,6 +8,8 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <AssemblyName>Price_Calculator.Backend.Web</AssemblyName>
+        <RootNamespace>Price_Calculator.Backend.Web</RootNamespace>
         <!--<DocumentationFile>bin\swagger-docs.xml</DocumentationFile>-->
     </PropertyGroup>
 

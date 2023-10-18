@@ -1,13 +1,11 @@
-﻿using Price_Calculator.Backend.Core.ContributorAggregate;
+﻿using Ardalis.Result;
 using Ardalis.SharedKernel;
 using FastEndpoints;
-using Price_Calculator.Backend.Web.Endpoints.ContributorEndpoints;
-using Price_Calculator.Backend.UseCases.Contributors.Create;
-using Price_Calculator.Backend.UseCases.Contributors.Update;
 using MediatR;
-using Ardalis.Result;
+using Price_Calculator.Backend.Core.ContributorAggregate;
+using Price_Calculator.Backend.UseCases.Contributors.Update;
 
-namespace Price_Calculator.Backend.Web.ContributorEndpoints;
+namespace Price_Calculator.Backend.Web.Contributors;
 
 /// <summary>
 /// Update an existing Contributor.

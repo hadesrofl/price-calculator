@@ -1,4 +1,4 @@
-﻿using Price;
+﻿using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 
 namespace Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.Factory;
 

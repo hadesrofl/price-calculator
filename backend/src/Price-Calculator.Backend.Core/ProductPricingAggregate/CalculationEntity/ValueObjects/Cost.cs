@@ -1,4 +1,4 @@
-﻿namespace Price;
+﻿namespace Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 
 /// <summary>
 /// Enum for different types of costs
@@ -63,7 +63,7 @@ public class Cost
 
   /// <summary>
   /// Checks whether this cost entry is a <see cref="CostType.Discount"/> and the currency of the given
-  /// <see cref="Price.Amount"/> equals the costs <see cref="Currency"/>.
+  /// <see cref="ValueObjects.Amount"/> equals the costs <see cref="Currency"/>.
   /// If both is true the <see cref="Amount"/> will be updated to the specific discount and applied as cost to the product. 
   /// </summary>
   /// <param name="amount">Is the price per unit which is necessary to determine the discount which is applied by a percentage of the price</param>

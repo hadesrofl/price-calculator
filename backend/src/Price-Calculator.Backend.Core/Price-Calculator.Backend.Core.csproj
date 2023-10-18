@@ -4,6 +4,8 @@
     <PropertyGroup>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <AssemblyName>Price_Calculator.Backend.Core</AssemblyName>
+        <RootNamespace>Price_Calculator.Backend.Core</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,6 +15,7 @@
         <PackageReference Include="Ardalis.SmartEnum"/>
         <PackageReference Include="Ardalis.Specification"/>
         <PackageReference Include="Autofac"/>
+        <PackageReference Include="AutoMapper" />
         <PackageReference Include="MediatR"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
     </ItemGroup>

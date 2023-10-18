@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Ardalis.SharedKernel;
 using Autofac;
+using AutoMapper.Contrib.Autofac.DependencyInjection;
 using Price_Calculator.Backend.Core.ContributorAggregate;
 using Price_Calculator.Backend.Core.Interfaces;
 using Price_Calculator.Backend.Infrastructure.Data;
@@ -10,6 +11,8 @@ using Price_Calculator.Backend.UseCases.Contributors.Create;
 using Price_Calculator.Backend.UseCases.Contributors.List;
 using MediatR;
 using MediatR.Pipeline;
+using Price_Calculator.Backend.Core.ProductPricingAggregate;
+using Price_Calculator.Backend.UseCases.ProductPricing.Create;
 using Module = Autofac.Module;
 
 namespace Price_Calculator.Backend.Infrastructure;
@@ -40,9 +43,9 @@ public class AutofacInfrastructureModule : Module
     private void LoadAssemblies()
     {
         // TODO: Replace these types with any type in the appropriate assembly/project
-        var coreAssembly = Assembly.GetAssembly(typeof(Contributor));
+        var coreAssembly = Assembly.GetAssembly(typeof(ProductPricing));
         var infrastructureAssembly = Assembly.GetAssembly(typeof(AutofacInfrastructureModule));
-        var useCasesAssembly = Assembly.GetAssembly(typeof(CreateContributorCommand));
+        var useCasesAssembly = Assembly.GetAssembly(typeof(CreateProductPricingCommand));
 
         AddToAssembliesIfNotNull(coreAssembly);
         AddToAssembliesIfNotNull(infrastructureAssembly);
@@ -64,6 +67,7 @@ public class AutofacInfrastructureModule : Module
         RegisterEF(builder);
         RegisterQueries(builder);
         RegisterMediatR(builder);
+        RegisterAutoMapper(builder);
     }
 
     private void RegisterEF(ContainerBuilder builder)
@@ -77,6 +81,9 @@ public class AutofacInfrastructureModule : Module
     private void RegisterQueries(ContainerBuilder builder)
     {
     }
+
+    private void RegisterAutoMapper(ContainerBuilder builder) => 
+      builder.RegisterAutoMapper(true, _assemblies.ToArray());
 
     private void RegisterMediatR(ContainerBuilder builder)
     {

@@ -1,4 +1,4 @@
-﻿namespace Price_Calculator.Backend.Web.Endpoints.ContributorEndpoints;
+﻿namespace Price_Calculator.Backend.Web.Contributors;
 
 public record DeleteContributorRequest
 {

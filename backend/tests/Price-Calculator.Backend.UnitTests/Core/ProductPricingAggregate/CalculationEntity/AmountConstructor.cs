@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity;
+using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 using Xunit;
 
 namespace Price;
@@ -27,7 +28,7 @@ public class AmountConstructor
   {
     return new List<object[]>
     {
-      new object[] { 2.37, new Currency("Euro", "€") }, new object[] { -2.37, new Currency("Euro", "€") }
+      new object[] { 2.37, new Currency("EUR") }, new object[] { -2.37, new Currency("EUR") }
     };
   }
 }

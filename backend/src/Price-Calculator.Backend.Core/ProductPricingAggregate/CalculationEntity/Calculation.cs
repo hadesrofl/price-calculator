@@ -1,21 +1,21 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using Ardalis.SharedKernel;
-using Price;
+using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 
 namespace Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity;
 
 /// <summary>
 ///   Represents a price calculation
 /// </summary>
-public class Calculation : EntityBase, IAggregateRoot
+public class Calculation : EntityBase
 {
   private readonly List<Cost> _costs = new();
 
   /// <summary>
   ///   Empty constructor for EFCore
   /// </summary>
-  public Calculation() : this(0, new Amount(0, new Currency("Euro", "€")))
+  public Calculation() : this(0, new Amount(0, new Currency("EUR")))
   {
   }
 

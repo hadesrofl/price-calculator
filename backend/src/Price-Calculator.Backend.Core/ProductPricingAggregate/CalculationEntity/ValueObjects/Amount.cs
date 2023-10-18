@@ -1,4 +1,4 @@
-﻿namespace Price;
+﻿namespace Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 
 /// <summary>
 ///   Represents a financial amount

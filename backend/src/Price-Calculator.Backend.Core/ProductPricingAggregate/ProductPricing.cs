@@ -1,4 +1,5 @@
-﻿using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity;
+﻿using Ardalis.SharedKernel;
+using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity;
 using Price_Calculator.Backend.Core.ProductPricingAggregate.ProductEntity;
 
 namespace Price_Calculator.Backend.Core.ProductPricingAggregate;
@@ -6,7 +7,7 @@ namespace Price_Calculator.Backend.Core.ProductPricingAggregate;
 /// <summary>
 /// Aggregate of a <see cref="Product"/> and its pricing <see cref="Calculation"/>
 /// </summary>
-public class ProductPricing
+public class ProductPricing : EntityBase, IAggregateRoot
 {
   /// <summary>
   /// Is the product this pricing relates to
