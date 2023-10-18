@@ -1,10 +1,13 @@
-﻿namespace Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 
 /// <summary>
 ///   Cost Performance Calculation for a <see cref="Calculation" />.
 ///   This class represents an evaluation on how pricing will cover costs and what kind of possible revenue or profit is to
 ///   achieve.
 /// </summary>
+[Owned]
 public class CostPerformanceCalculation
 {
   /// <summary>

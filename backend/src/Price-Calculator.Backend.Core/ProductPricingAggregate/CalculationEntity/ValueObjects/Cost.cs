@@ -1,4 +1,6 @@
-﻿namespace Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 
 /// <summary>
 /// Enum for different types of costs
@@ -13,8 +15,21 @@ public enum CostType
 /// <summary>
 /// Represents cost of a product
 /// </summary>
+[Owned]
 public class Cost
 {
+  /// <summary>
+  /// Id of this entity. Used only, because SQLite does not work with generated values for composite keys
+  /// </summary>
+  // public int Id { get; init; }
+
+  public Cost()
+  {
+    Name = string.Empty;
+    Amount = new();
+    Discount = new Discount(0);
+  }
+
   /// <summary>
   /// Constructor
   /// </summary>
@@ -43,8 +58,8 @@ public class Cost
   /// <summary>
   /// Is the name of the cost
   /// </summary>
-  public string Name { get; }
-  
+  public string Name { get; init; }
+
   /// <summary>
   /// Is the financial value of the cost
   /// </summary>
@@ -53,13 +68,13 @@ public class Cost
   /// <summary>
   /// Is the type of cost to distinguish the cost entry
   /// </summary>
-  public CostType Type { get; }
+  public CostType Type { get; init; }
 
   /// <summary>
   /// Is the information about discounting if <see cref="Type"/> is <see cref="CostType.Discount"/>.
   /// Based on this information <see cref="ApplyDiscountAndUpdateValue"/> will update the <see cref="Amount"/> of this cost entry.
   /// </summary>
-  public Discount Discount { get; }
+  public Discount Discount { get; init; }
 
   /// <summary>
   /// Checks whether this cost entry is a <see cref="CostType.Discount"/> and the currency of the given

@@ -37,4 +37,8 @@
       <ProjectReference Include="..\Price-Calculator.Backend.UseCases\Price-Calculator.Backend.UseCases.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="log20231018.txt" />
+    </ItemGroup>
+
 </Project>

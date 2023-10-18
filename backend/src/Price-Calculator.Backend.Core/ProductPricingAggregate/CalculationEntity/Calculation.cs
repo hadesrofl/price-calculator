@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Ardalis.SharedKernel;
 using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 
@@ -15,7 +14,7 @@ public class Calculation : EntityBase
   /// <summary>
   ///   Empty constructor for EFCore
   /// </summary>
-  public Calculation() : this(0, new Amount(0, new Currency("EUR")))
+  public Calculation() : this(0, new Amount())
   {
   }
 
@@ -34,14 +33,14 @@ public class Calculation : EntityBase
   /// <summary>
   ///   The max volume that can be sold
   /// </summary>
-  public int SalesVolume { get; }
+  public int SalesVolume { get; set; }
 
   /// <summary>
   ///   The price per unit of the product
   /// </summary>
   public Amount PricePerUnit { get; private set; }
 
-  [NotMapped] public ReadOnlyCollection<Cost> Costs => _costs.AsReadOnly();
+  public IReadOnlyCollection<Cost> Costs => _costs.AsReadOnly();
 
   /// <summary>
   ///   The calculation of the performance of this pricing regarding revenue and costs

@@ -2,6 +2,7 @@
 using Ardalis.SharedKernel;
 using Price_Calculator.Backend.Core.ContributorAggregate;
 using Microsoft.EntityFrameworkCore;
+using Price_Calculator.Backend.Core.ProductPricingAggregate;
 
 namespace Price_Calculator.Backend.Infrastructure.Data;
 
@@ -17,6 +18,8 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Contributor> Contributors => Set<Contributor>();
+    
+    // public DbSet<ProductPricing> ProductPricings => Set<ProductPricing>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

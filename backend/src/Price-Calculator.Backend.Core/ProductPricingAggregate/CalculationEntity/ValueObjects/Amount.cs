@@ -1,10 +1,21 @@
-﻿namespace Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 
 /// <summary>
 ///   Represents a financial amount
 /// </summary>
+[Owned]
 public record Amount
 {
+  /// <summary>
+  ///   Empty constructor for EFCore
+  /// </summary>
+  public Amount()
+  {
+    Currency = new Currency();
+  }
+  
   /// <summary>
   ///   Constructor
   /// </summary>
@@ -20,5 +31,5 @@ public record Amount
   public decimal Value { get; init; }
 
   /// <summary>Is the currency of the value</summary>
-  public Currency Currency { get; }
+  public Currency Currency { get; init; }
 }

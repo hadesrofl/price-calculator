@@ -20,10 +20,7 @@ public class CreateProductPricingHandler : ICommandHandler<CreateProductPricingC
     CancellationToken cancellationToken)
   {
     var newProductPricing = _mapper.Map<Core.ProductPricingAggregate.ProductPricing>(request.ProductPricing);
-    await Task.Delay(10, cancellationToken);
-    // var createdItem = newProductPricing;
     var createdItem = await _repository.AddAsync(newProductPricing, cancellationToken);
-    var retItem = _mapper.Map<ProductPricingDto>(createdItem);
-    return retItem;
+    return _mapper.Map<ProductPricingDto>(createdItem);
   }
 }

@@ -1,10 +1,20 @@
-﻿namespace Price_Calculator.Backend.Core.ProductPricingAggregate.ProductEntity.ValueObjects;
+﻿using Ardalis.SharedKernel;
+
+namespace Price_Calculator.Backend.Core.ProductPricingAggregate.ProductEntity.ValueObjects;
 
 /// <summary>
 ///   Represents a category for a <see cref="Product" />
 /// </summary>
-public class ProductCategory
+public class ProductCategory : EntityBase
 {
+  /// <summary>
+  ///   Empty constructor for EFCore
+  /// </summary>
+  public ProductCategory()
+  {
+    
+  }
+  
   /// <summary>
   ///   Constructor
   /// </summary>
@@ -17,5 +27,5 @@ public class ProductCategory
   /// <summary>
   ///   Is the name of the category
   /// </summary>
-  public string Name { get; }
+  public string Name { get; init; } = string.Empty;
 }

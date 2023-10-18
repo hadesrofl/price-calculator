@@ -9,6 +9,15 @@ namespace Price_Calculator.Backend.Core.ProductPricingAggregate.ProductEntity;
 public class Product : EntityBase
 {
   /// <summary>
+  ///   Empty constructor for EFCore
+  /// </summary>
+  public Product()
+  {
+    Name = string.Empty;
+    Category = new ();
+  }
+  
+  /// <summary>
   ///   Constructor
   /// </summary>
   /// <param name="name">Is the name of the product</param>
@@ -22,10 +31,10 @@ public class Product : EntityBase
   /// <summary>
   ///   Is the name of the product
   /// </summary>
-  public string Name { get; }
+  public string Name { get; init; }
 
   /// <summary>
   ///   Is the category this product belongs to
   /// </summary>
-  public ProductCategory Category { get; }
+  public ProductCategory Category { get; private set; }
 }

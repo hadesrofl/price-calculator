@@ -1,6 +1,8 @@
 ﻿using Ardalis.SharedKernel;
 using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity;
+using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 using Price_Calculator.Backend.Core.ProductPricingAggregate.ProductEntity;
+using Price_Calculator.Backend.Core.ProductPricingAggregate.ProductEntity.ValueObjects;
 
 namespace Price_Calculator.Backend.Core.ProductPricingAggregate;
 
@@ -12,13 +14,19 @@ public class ProductPricing : EntityBase, IAggregateRoot
   /// <summary>
   /// Is the product this pricing relates to
   /// </summary>
-  public Product Product { get; }
+  public Product Product { get; private set; }
   
   /// <summary>
   /// Is the price calculation
   /// </summary>
-  public Calculation Calculation { get; }
+  public Calculation Calculation { get; private set; }
 
+  public ProductPricing()
+  {
+    Product = new Product(string.Empty, new ProductCategory());
+    Calculation = new Calculation(0, new Amount());
+  }
+  
   /// <summary>
   /// Constructor
   /// </summary>
