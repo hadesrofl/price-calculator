@@ -1,3 +1,4 @@
+"use client";
 import {
   BottomNavigation,
   BottomNavigationAction,

@@ -5,3 +5,5 @@ export const TranslationsCostCalculation = "costCalculation";
 export const TranslationsCostForm = "costForm";
 export const TranslationsSalesForm = "salesForm";
 export const TranslationsCostStatement = "costStatement";
+export const TranslationsRouteNames = "routeNames";
+export const TranslationsServiceBoard = "serviceBoard";
