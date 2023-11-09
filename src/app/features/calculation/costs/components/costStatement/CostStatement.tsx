@@ -1,5 +1,5 @@
 import { Divider, Grid, Typography } from "@mui/material";
-import { Cost, calculateTotalCosts } from "../../types/Costs";
+import { Cost, sumCosts } from "../../types/Costs";
 import { Discount } from "../../types/Discount";
 import { useTranslation } from "@/app/i18n/i18next";
 import { TranslationsCostStatement } from "@/app/i18n/locales/translationNamespaces";
@@ -20,7 +20,7 @@ export default function CostStatement(props: CostStatementProps) {
   const { costs, currency, discount, title } = props;
   const { t } = useTranslation(TranslationsCostStatement);
   const FractionDigits = 2;
-  const totalCosts = calculateTotalCosts(costs);
+  const totalCosts = sumCosts(costs);
 
   return (
     <Grid item xs={12} sm={6}>

@@ -7,7 +7,7 @@ import { Grid, IconButton, Stack, Typography } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
 
 function translatePathToRouteName(pathName: string) {
-  if (pathName.length === 1) return "Start";
+  if (pathName.length === 1) return "Services";
 
   const isServicesRoute = pathName.indexOf(ServicesRoute) !== -1 ? true : false;
   if (!isServicesRoute) return "Unknown";

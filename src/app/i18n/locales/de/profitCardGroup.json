@@ -1,0 +1,16 @@
+{
+  "Labels": {
+    "BreakEven": "Break-Even",
+    "Revenue": "Umsatz",
+    "UnitContributionMargin": "Deckungsbeitrag I",
+    "Profit": "Gewinn"
+  },
+  "Adornment": {
+    "Pieces": "Stk."
+  },
+  "Tooltips": {
+    "BreakEven": "Break-Even ist die Nummer von verkauften Produkten, die notwendig sind, um die Gesamtkosten (fixe + variable Kosten) zu decken",
+    "Revenue": "Berechnet sich anhand der Absatzmenge, dem Stückpreis und abzüglich des Rabattaufschlags je Stück",
+    "UnitContributionMargin": "Deckungsbeitrag I ergibt sich aus Umsatz - variable Kosten"
+  }
+}

@@ -45,6 +45,6 @@ export function areCostsEqual(costs: Cost[], otherCosts: Cost[]) {
  * @param {Cost[]} costs Are the costs to sum up
  * @returns {number} the sum of all costs of that array
  */
-export function calculateTotalCosts(costs: Cost[]): number {
+export function sumCosts(costs: Cost[]): number {
   return costs.reduce((totalCosts, cost) => totalCosts + cost.value, 0);
 }

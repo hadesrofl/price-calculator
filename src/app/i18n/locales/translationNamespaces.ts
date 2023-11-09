@@ -7,3 +7,6 @@ export const TranslationsSalesForm = "salesForm";
 export const TranslationsCostStatement = "costStatement";
 export const TranslationsRouteNames = "routeNames";
 export const TranslationsServiceBoard = "serviceBoard";
+export const TranslationsInputCardGroup = "inputCardGroup";
+export const TranslationsCostCardGroup = "costCardGroup";
+export const TranslationsProfitCardGroup = "profitCardGroup";

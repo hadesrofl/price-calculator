@@ -1,0 +1,11 @@
+{
+  "Labels": {
+    "OwnCosts": "Selbstkosten",
+    "FixedCosts": "Fixe Kosten",
+    "VariableCosts": "Variable Kosten je Stück",
+    "TotalCosts": "Gesamtkosten"
+  },
+  "Tooltips": {
+    "OwnCosts": "Selbstkosten sind die Gesamtkosten (fixe + variable Kosten) pro Stück"
+  }
+}

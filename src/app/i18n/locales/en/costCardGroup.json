@@ -1,0 +1,11 @@
+{
+  "Labels": {
+    "OwnCosts": "Own Costs",
+    "FixedCosts": "Fixed Costs",
+    "VariableCosts": "Variable Costs per Piece",
+    "TotalCosts": "Total Costs"
+  },
+  "Tooltips": {
+    "OwnCosts": "Own Costs are the total costs (fixed and variable) per piece"
+  }
+}

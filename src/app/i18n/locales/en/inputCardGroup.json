@@ -1,0 +1,13 @@
+{
+  "Adornment": {
+    "Pieces": "pcs."
+  },
+  "Labels": {
+    "SalesVolume": "Sales Volume",
+    "PricePerUnit": "Price per Unit",
+    "Discount": "Discount"
+  },
+  "Tooltips": {
+    "Discount": "Calculated from Discount in percent and Price per Unit"
+  }
+}

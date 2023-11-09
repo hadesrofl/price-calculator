@@ -1,4 +1,4 @@
-import { Costs, calculateTotalCosts, createEmptyCosts } from "./Costs";
+import { Costs, sumCosts, createEmptyCosts } from "./Costs";
 import { createEmptyDiscount, Discount } from "./Discount";
 
 /**
@@ -43,9 +43,8 @@ export function createEmptySales(currency: string) {
  * @returns {Sales} the updated sales entity with the new calculated values
  */
 export function calculateSales(sales: Sales): Sales {
-  const totalFixCosts = calculateTotalCosts(sales.costs.fixCosts);
-  const totalVariableCosts =
-    calculateTotalCosts(sales.costs.variableCosts) * sales.volume;
+  const totalFixCosts = sumCosts(sales.costs.fixCosts);
+  const totalVariableCosts = sumCosts(sales.costs.variableCosts) * sales.volume;
   const costPrice = !Number.isFinite(
     (totalFixCosts +
       totalVariableCosts +
@@ -68,7 +67,7 @@ export function calculateSales(sales: Sales): Sales {
     sales.pricePerUnit * sales.volume -
     sales.discount.costPerUnit * sales.volume;
   const unitContributionMargin = revenue - totalVariableCosts;
-  const profit = unitContributionMargin - totalFixCosts;
+  const profit = revenue - totalFixCosts - totalVariableCosts;
 
   return {
     ...sales,
