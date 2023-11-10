@@ -5,6 +5,7 @@ import {
   Typography,
   AccordionDetails,
   Grid,
+  Stack,
 } from "@mui/material";
 import CostStatement from "./CostStatement";
 import { Costs, sumCosts } from "../../types/Costs";
@@ -42,7 +43,7 @@ export default function DetailedCostStatement(
         <Typography variant="subtitle1">{t("Title")}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Grid container spacing={2}>
+        <Stack spacing={5}>
           <CostStatement
             costs={costs.fixCosts}
             currency={currency}
@@ -54,7 +55,7 @@ export default function DetailedCostStatement(
             currency={currency}
             title={t("VariableCosts")}
           />
-        </Grid>
+        </Stack>
       </AccordionDetails>
     </Accordion>
   );
