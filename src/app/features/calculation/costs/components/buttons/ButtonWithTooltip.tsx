@@ -16,8 +16,11 @@ export default function ButtonWithTooltip(
   const { tooltipText, ...other } = props;
   return (
     <Tooltip title={tooltipText}>
-      <span>
-        <Button {...other} />
+      <span style={{ alignSelf: "end" }}>
+        <Button
+          sx={{ justifyContent: "left", alignSelf: "center", ...other.sx }}
+          {...other}
+        />
       </span>
     </Tooltip>
   );

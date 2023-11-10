@@ -1,0 +1,16 @@
+{
+  "Labels": {
+    "BreakEven": "Break Even",
+    "Revenue": "Revenue",
+    "UnitContributionMargin": "Unit Contribution Margin",
+    "Profit": "Profit"
+  },
+  "Adornment": {
+    "Pieces": "pcs."
+  },
+  "Tooltips": {
+    "BreakEven": "Break Even is the necessary number of sold products to cover total costs (fixed and variable)",
+    "Revenue": "Calculated from the Sales Volume and Price per Unit subtracted by the Discount per unit.",
+    "UnitContributionMargin": "Unit Contribution Margin is calculated from Revenue - Variable Costs"
+  }
+}

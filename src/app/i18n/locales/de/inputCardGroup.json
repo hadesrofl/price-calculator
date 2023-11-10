@@ -1,0 +1,13 @@
+{
+  "Adornment": {
+    "Pieces": "Stk."
+  },
+  "Labels": {
+    "SalesVolume": "Absatzmenge",
+    "PricePerUnit": "Stückpreis",
+    "Discount": "Rabattaufschlag"
+  },
+  "Tooltips": {
+    "Discount": "Berechnet sich aus dem Rabattaufschlag in Prozent und dem Stückpreis"
+  }
+}

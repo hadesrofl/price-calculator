@@ -79,6 +79,7 @@ export default function NumberInput(props: NumberInputProps) {
       }}
       InputProps={{
         readOnly: readonly,
+        disableUnderline: readonly,
         style: readonly
           ? { background: theme.palette.background.default }
           : undefined,

@@ -7,7 +7,7 @@ import {
   Grid,
 } from "@mui/material";
 import CostStatement from "./CostStatement";
-import { Costs, calculateTotalCosts } from "../../types/Costs";
+import { Costs, sumCosts } from "../../types/Costs";
 import { Discount } from "../../types/Discount";
 import { useTranslation } from "@/app/i18n/i18next";
 import { TranslationsCostStatement } from "@/app/i18n/locales/translationNamespaces";
@@ -35,8 +35,7 @@ export default function DetailedCostStatement(
   return (
     <Accordion
       disabled={
-        calculateTotalCosts(costs.fixCosts) === 0 &&
-        calculateTotalCosts(costs.variableCosts) === 0
+        sumCosts(costs.fixCosts) === 0 && sumCosts(costs.variableCosts) === 0
       }
     >
       <AccordionSummary expandIcon={<ExpandMore />} id="costStatement">
