@@ -134,7 +134,7 @@ export default function SalesForm(props: SalesFormProps) {
               onValidationErrors={onValidationErrors}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <CostCardGroup
               costPrice={sales.costPrice}
               fixedCosts={sales.costs.fixCosts}
@@ -150,7 +150,7 @@ export default function SalesForm(props: SalesFormProps) {
               currency={sales.currency}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <ProfitCardGroup
               breakEven={sales.breakEven}
               revenue={sales.revenue}

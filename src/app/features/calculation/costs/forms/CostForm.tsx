@@ -5,6 +5,7 @@ import {
   TextField,
   Box,
   IconButton,
+  Divider,
 } from "@mui/material";
 import { Cost } from "../types/Costs";
 import useTextFieldStyles from "../styles/useTextFieldStyles";
@@ -19,6 +20,7 @@ import AddCircle from "@mui/icons-material/AddCircle";
 import useDesktopSize from "@/app/hooks/useDesktopSize";
 import { useTranslation } from "@/app/i18n/i18next";
 import { TranslationsCostForm } from "@/app/i18n/locales/translationNamespaces";
+import CostPieChart from "../components/charts/CostPieChart";
 
 /**
  * Interface for the properties of the {@link CostForm} like a handler in case cost changed
@@ -63,7 +65,7 @@ export default function CostForm(props: CostFormProps): JSX.Element {
   };
 
   return (
-    <Stack alignItems="left">
+    <Stack>
       {isDesktopSize ? <Box /> : <Typography variant="h5">{title}</Typography>}
       <Stack direction={isDesktopSize ? "row" : "column"} spacing={2}>
         <Grid container rowSpacing={2}>
@@ -114,10 +116,13 @@ export default function CostForm(props: CostFormProps): JSX.Element {
               </Grid>
             );
           })}
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={12}>
             <IconButton color="success" onClick={addInputField}>
               <AddCircle />
             </IconButton>
+          </Grid>
+          <Grid item xs={12}>
+            <CostPieChart costs={costs} />
           </Grid>
         </Grid>
       </Stack>
