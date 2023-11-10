@@ -11,6 +11,7 @@ import InputCardGroup from "../components/cards/InputCardGroup";
 import CostCardGroup from "../components/cards/CostCardGroup";
 import ProfitCardGroup from "../components/cards/ProfitCardGroup";
 import { sumCosts } from "../types/Costs";
+import CostPerformanceBarChart from "../components/charts/CostPerformanceBarChart";
 
 /**
  * Interface for the properties of the {@link SalesForm} like a handler in case sales changed
@@ -155,6 +156,19 @@ export default function SalesForm(props: SalesFormProps) {
               breakEven={sales.breakEven}
               revenue={sales.revenue}
               unitContributionMargin={sales.unitContributionMargin}
+              profit={sales.profit}
+              currency={sales.currency}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <CostPerformanceBarChart
+              totalCosts={
+                sumCosts(sales.costs.fixCosts) +
+                sumCosts(sales.costs.variableCosts) * sales.volume
+              }
+              fixedCosts={sumCosts(sales.costs.fixCosts)}
+              variableCosts={sumCosts(sales.costs.variableCosts) * sales.volume}
+              revenue={sales.revenue}
               profit={sales.profit}
               currency={sales.currency}
             />
