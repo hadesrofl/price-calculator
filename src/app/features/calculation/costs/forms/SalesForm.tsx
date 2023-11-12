@@ -1,5 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
-import { Stack, Box, Typography, Grid, Divider } from "@mui/material";
+import {
+  Stack,
+  Box,
+  Typography,
+  Grid,
+  Divider,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
 import { Sales, calculateSales } from "../types/Sales";
 import { SalesValidationErrors } from "./validation/useSalesValidator";
 import DetailedCostStatement from "../components/costStatement/DetailedCostStatement";
@@ -115,14 +124,14 @@ export default function SalesForm(props: SalesFormProps) {
   ]);
 
   return (
-    <Stack alignItems="left">
+    <Stack alignItems="left" spacing={2}>
       {isDesktopSize ? (
         <Box />
       ) : (
         <Typography variant="h5">{t("Title")}</Typography>
       )}
-      <Stack direction={isDesktopSize ? "row" : "column"} spacing={2}>
-        <Grid alignItems="center" container spacing={2}>
+      <Stack direction={isDesktopSize ? "row" : "column"}>
+        <Grid alignItems="center" container spacing={3}>
           <Grid item xs={12} sm={12}>
             <InputCardGroup
               initialSalesVolume={sales.volume}
