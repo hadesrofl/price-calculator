@@ -19,7 +19,7 @@ export default function ServiceBoard() {
   const theme = useTheme();
   return (
     <Grid container>
-      <Grid item xs={3}>
+      <Grid item xs={12} sm={6} md={3}>
         <Link href={CostCalculationRoute}>
           <ColoredCard color={theme.palette.primary.main}>
             <EuroIcon sx={{ marginRight: 2 }} />

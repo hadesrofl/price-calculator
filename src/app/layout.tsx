@@ -19,7 +19,7 @@ export default function RootLayout({
           <CalculatorAppBar />
         </nav>
 
-        <Box component="main" sx={{ paddingTop: 10 }}>
+        <Box component="main" sx={{ paddingTop: 10, marginBottom: 5 }}>
           <Box sx={{ marginBottom: 2 }}>
             <PageBar />
           </Box>

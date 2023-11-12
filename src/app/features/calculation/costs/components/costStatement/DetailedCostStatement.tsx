@@ -6,12 +6,14 @@ import {
   AccordionDetails,
   Grid,
   Stack,
+  useTheme,
 } from "@mui/material";
 import CostStatement from "./CostStatement";
 import { Costs, sumCosts } from "../../types/Costs";
 import { Discount } from "../../types/Discount";
 import { useTranslation } from "@/app/i18n/i18next";
 import { TranslationsCostStatement } from "@/app/i18n/locales/translationNamespaces";
+import ColoredAccordion from "../coloredAccordion/ColoredAccordion";
 
 /**
  * An interface for the properties of {@link DetailedCostStatement}
@@ -32,31 +34,30 @@ export default function DetailedCostStatement(
 ) {
   const { costs, discount, currency } = props;
   const { t } = useTranslation(TranslationsCostStatement);
+  const theme = useTheme();
+  const titleColor = theme.palette.error.main;
 
   return (
-    <Accordion
+    <ColoredAccordion
       disabled={
         sumCosts(costs.fixCosts) === 0 && sumCosts(costs.variableCosts) === 0
       }
+      titleColor={titleColor}
+      title={t("Title")}
     >
-      <AccordionSummary expandIcon={<ExpandMore />} id="costStatement">
-        <Typography variant="subtitle1">{t("Title")}</Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Stack spacing={5}>
-          <CostStatement
-            costs={costs.fixCosts}
-            currency={currency}
-            title={t("FixedCosts")}
-          />
-          <CostStatement
-            costs={costs.variableCosts}
-            discount={discount}
-            currency={currency}
-            title={t("VariableCosts")}
-          />
-        </Stack>
-      </AccordionDetails>
-    </Accordion>
+      <Stack spacing={5}>
+        <CostStatement
+          costs={costs.fixCosts}
+          currency={currency}
+          title={t("FixedCosts")}
+        />
+        <CostStatement
+          costs={costs.variableCosts}
+          discount={discount}
+          currency={currency}
+          title={t("VariableCosts")}
+        />
+      </Stack>
+    </ColoredAccordion>
   );
 }

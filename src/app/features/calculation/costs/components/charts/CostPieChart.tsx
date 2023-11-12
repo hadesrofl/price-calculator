@@ -35,12 +35,12 @@ export default function CostPieChart(props: CostPieChartProps) {
           paddingAngle: 5,
           innerRadius: 30,
           cornerRadius: 5,
-          cx: desktopSize ? 400 : 200,
-          cy: desktopSize ? 175 : 300,
+          cx: desktopSize ? 450 : 150,
+          cy: desktopSize ? 150 : 200,
         },
       ]}
-      width={desktopSize ? 600 : 400}
-      height={desktopSize ? 350 : 500}
+      width={desktopSize ? 650 : 300}
+      height={desktopSize ? 300 : 400}
       slotProps={{
         legend: {
           direction: desktopSize ? "column" : "row",
