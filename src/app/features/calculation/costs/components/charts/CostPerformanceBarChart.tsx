@@ -1,3 +1,4 @@
+import useDesktopSize from "@/app/hooks/useDesktopSize";
 import { useTranslation } from "@/app/i18n/i18next";
 import { TranslationsCostPerformanceBarChart } from "@/app/i18n/locales/translationNamespaces";
 import { BarChart } from "@mui/x-charts";
@@ -17,6 +18,7 @@ export default function CostPerformanceBarChart(
   const { totalCosts, fixedCosts, variableCosts, revenue, profit, currency } =
     props;
   const { t } = useTranslation(TranslationsCostPerformanceBarChart);
+  const desktopSize = useDesktopSize();
   const chartSettings = {
     yAxis: [{ label: currency }],
   };
@@ -63,7 +65,16 @@ export default function CostPerformanceBarChart(
           valueFormatter,
         },
       ]}
-      height={300}
+      height={400}
+      margin={{
+        bottom: desktopSize ? 75 : 100,
+      }}
+      slotProps={{
+        legend: {
+          position: { vertical: "bottom", horizontal: "middle" },
+          padding: 0,
+        },
+      }}
       {...chartSettings}
     />
   );
