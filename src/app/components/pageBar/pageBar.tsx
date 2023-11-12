@@ -1,4 +1,5 @@
 "use client";
+import useDesktopSize from "@/app/hooks/useDesktopSize";
 import { useTranslation } from "@/app/i18n/i18next";
 import { TranslationsRouteNames } from "@/app/i18n/locales/translationNamespaces";
 import { ServicesRoute } from "@/app/routes";
@@ -32,11 +33,12 @@ function capitalize(sentence: string) {
 export default function PageBar() {
   const router = useRouter();
   const pathName = usePathname();
+  const desktopSize = useDesktopSize();
   const { t } = useTranslation(TranslationsRouteNames);
   const title = t(translatePathToRouteName(pathName));
 
   return (
-    <Grid container>
+    <Grid container marginTop={desktopSize ? 0 : 2}>
       <Grid item>
         {pathName !== "/" ? (
           <IconButton onClick={router.back}>
@@ -46,7 +48,7 @@ export default function PageBar() {
           <IconButton />
         )}
       </Grid>
-      <Grid item xs={11}>
+      <Grid item xs={10}>
         <Typography component="span" variant="h4">
           {title}
         </Typography>
