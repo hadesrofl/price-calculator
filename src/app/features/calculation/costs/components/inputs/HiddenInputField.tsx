@@ -6,13 +6,5 @@ import { Input, InputProps } from "@mui/material";
  * @returns {JSX.Element} An input field that is hidden from the user
  */
 export default function HiddenInputField(props: InputProps) {
-  return (
-    <Input
-      sx={{
-        clipPath: "inset(50%)",
-        position: "absolute",
-      }}
-      {...props}
-    />
-  );
+  return <Input className="absolute [clip-path:inset(50%)]" {...props} />;
 }
