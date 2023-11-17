@@ -5,7 +5,6 @@ import {
   TextField,
   Box,
   IconButton,
-  Divider,
 } from "@mui/material";
 import { Cost } from "../types/Costs";
 import useTextFieldStyles from "../styles/useTextFieldStyles";
@@ -75,7 +74,7 @@ export default function CostForm(props: CostFormProps): JSX.Element {
               onCostChanged([...newCosts]);
             };
             return (
-              <Grid container key={idx} marginBottom={2}>
+              <Grid container key={idx} className="mb-2">
                 <Grid item xs={12} sm={6}>
                   <TextField
                     variant="filled"
@@ -95,7 +94,7 @@ export default function CostForm(props: CostFormProps): JSX.Element {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Stack direction="row" alignItems="end">
+                  <Stack className="items-end" direction="row">
                     <NumberInput
                       value={cost.value}
                       name={`${idx.toString()}_value`}
