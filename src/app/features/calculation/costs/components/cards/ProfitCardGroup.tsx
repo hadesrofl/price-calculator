@@ -29,13 +29,12 @@ export default function ProfitCardGroup(props: ProfitCardGroupProps) {
   return (
     <ColoredAccordion title={t("Title")} titleColor={titleColor}>
       <Grid
-        alignItems="center"
+        className="items-center mt-2"
         container
         rowSpacing={2}
         columnSpacing={4}
-        marginTop={1}
       >
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} lg={3}>
           <ColoredCard color={computedCardColor} title={t("Labels.BreakEven")}>
             <ButtonWithTooltip disabled tooltipText={t("Tooltips.BreakEven")}>
               <Info color="primary" />
@@ -48,7 +47,7 @@ export default function ProfitCardGroup(props: ProfitCardGroupProps) {
             />
           </ColoredCard>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} lg={3}>
           <ColoredCard color={profitCardColor} title={t("Labels.Revenue")}>
             <ButtonWithTooltip disabled tooltipText={t("Tooltips.Revenue")}>
               <Info color="primary" />
@@ -61,7 +60,7 @@ export default function ProfitCardGroup(props: ProfitCardGroupProps) {
             />
           </ColoredCard>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} lg={3}>
           <ColoredCard
             color={computedCardColor}
             title={t("Labels.UnitContributionMargin")}
@@ -80,7 +79,7 @@ export default function ProfitCardGroup(props: ProfitCardGroupProps) {
             />
           </ColoredCard>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} lg={3}>
           <ColoredCard
             color={profit > 0 ? profitCardColor : theme.palette.error.main}
             title={t("Labels.Profit")}
