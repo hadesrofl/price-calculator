@@ -18,27 +18,14 @@ export default function CalculatorBottomBar(): JSX.Element {
   const isDesktopSize = useDesktopSize();
   const [value, setValue] = useState(0);
   return (
-    <Paper
-      sx={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        minHeigh: "20px",
-      }}
-      elevation={3}
-    >
+    <Paper className="fixed inset-x-0 bottom-0 min-h-5" elevation={3}>
       <BottomNavigation
         showLabels
         value={value}
-        onChange={(event, newValue) => {
+        onChange={(_, newValue) => {
           setValue(newValue);
         }}
-        sx={{
-          alignItems: "center",
-          marginTop: "0px",
-          justifyContent: "space-around",
-        }}
+        className="items-center mt-0 justify-around"
       >
         <BottomNavigationAction
           disabled
@@ -47,7 +34,6 @@ export default function CalculatorBottomBar(): JSX.Element {
         <BottomNavigationAction
           label={
             <a href="https://www.flaticon.com/free-icons/price">
-              {" "}
               <Typography variant="subtitle2" noWrap={isDesktopSize}>
                 Logo created by juicy_fish - Flaticon
               </Typography>

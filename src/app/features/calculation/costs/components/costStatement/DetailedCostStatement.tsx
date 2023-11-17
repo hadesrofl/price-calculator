@@ -1,13 +1,4 @@
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import {
-  Accordion,
-  AccordionSummary,
-  Typography,
-  AccordionDetails,
-  Grid,
-  Stack,
-  useTheme,
-} from "@mui/material";
+import { Stack, useTheme } from "@mui/material";
 import CostStatement from "./CostStatement";
 import { Costs, sumCosts } from "../../types/Costs";
 import { Discount } from "../../types/Discount";

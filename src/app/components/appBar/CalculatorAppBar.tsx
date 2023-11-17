@@ -22,40 +22,25 @@ export default function CalculatorAppBar(): JSX.Element {
   const { t } = useTranslation(TranslationsAppBar);
   return (
     <AppBar>
-      <Toolbar disableGutters sx={{ marginLeft: "10px", marginRight: "10px" }}>
-        <Grid container alignItems="center">
-          <Grid item xs={12} md={6}>
-            <Stack justifyContent="start" spacing={1} direction="row">
-              <Logo
-                style={{
-                  color: "red",
-                  marginTop: 2,
-                  alignSelf: "center",
-                }}
-              />
+      <Toolbar disableGutters className="mx-2.5">
+        <Grid container className="items-center">
+          <Grid item xs={6}>
+            <Stack className="justify-start" spacing={1} direction="row">
+              <Logo classes="mt-2 self-center text-red-700" />
               <Link href="/">
                 <Typography
                   variant="h6"
                   noWrap
                   component="span"
-                  alignItems="center"
-                  sx={{
-                    mr: 2,
-                    display: { xs: "none", md: "flex" },
-                    fontFamily: "monospace",
-                    fontWeight: 700,
-                    letterSpacing: ".3rem",
-                    color: "inherit",
-                    textDecoration: "none",
-                  }}
+                  className="items-center mr-0.5 text-inherit no-underline font-mono font-bold tracking-[.3rem] hidden md:flex"
                 >
                   {t("Title")}
                 </Typography>
               </Link>
             </Stack>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <Stack justifyContent="end" spacing={1} direction="row">
+          <Grid item xs={6}>
+            <Stack className="justify-end" spacing={1} direction="row">
               <LanguageMenu />
             </Stack>
           </Grid>

@@ -21,10 +21,7 @@ interface CustomAdornmentProps {
 function CustomAdornment(props: CustomAdornmentProps): JSX.Element {
   const { text } = props;
   return (
-    <InputAdornment
-      sx={{ marginLeft: "10px", marginRight: "10px" }}
-      position="start"
-    >
+    <InputAdornment className="mx-2.5" position="start">
       {text}
     </InputAdornment>
   );

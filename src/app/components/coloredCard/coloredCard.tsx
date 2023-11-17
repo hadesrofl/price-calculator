@@ -2,7 +2,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Stack,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -24,23 +23,14 @@ export default function ColoredCard(props: ColoredCardProps) {
         title={
           <Typography
             variant="h6"
-            sx={{
-              color: theme.palette.getContrastText(color),
-              textAlign: "center",
-            }}
+            color={theme.palette.getContrastText(color)}
+            className="text-center"
           >
             {title}
           </Typography>
         }
       />
-      <CardContent
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        {children}
-      </CardContent>
+      <CardContent className="flex justify-center">{children}</CardContent>
     </Card>
   );
 }

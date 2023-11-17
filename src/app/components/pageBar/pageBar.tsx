@@ -4,7 +4,7 @@ import { useTranslation } from "@/app/i18n/i18next";
 import { TranslationsRouteNames } from "@/app/i18n/locales/translationNamespaces";
 import { ServicesRoute } from "@/app/routes";
 import ArrowBack from "@mui/icons-material/ArrowBack";
-import { Grid, IconButton, Stack, Typography } from "@mui/material";
+import { Grid, IconButton, Typography } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
 
 function translatePathToRouteName(pathName: string) {

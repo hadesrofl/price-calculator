@@ -1,14 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import {
-  Stack,
-  Box,
-  Typography,
-  Grid,
-  Divider,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from "@mui/material";
+import { Stack, Box, Typography, Grid, Divider } from "@mui/material";
 import { Sales, calculateSales } from "../types/Sales";
 import { SalesValidationErrors } from "./validation/useSalesValidator";
 import DetailedCostStatement from "../components/costStatement/DetailedCostStatement";
@@ -124,15 +115,15 @@ export default function SalesForm(props: SalesFormProps) {
   ]);
 
   return (
-    <Stack alignItems="left" spacing={2}>
+    <Stack className="items-start" spacing={2}>
       {isDesktopSize ? (
         <Box />
       ) : (
         <Typography variant="h5">{t("Title")}</Typography>
       )}
       <Stack direction={isDesktopSize ? "row" : "column"}>
-        <Grid alignItems="center" container spacing={3}>
-          <Grid item xs={12} sm={12}>
+        <Grid className="items-center" container spacing={3}>
+          <Grid item xs={11} sm={12}>
             <InputCardGroup
               initialSalesVolume={sales.volume}
               onSalesVolumeChange={onSalesVolumeChange}
@@ -144,7 +135,7 @@ export default function SalesForm(props: SalesFormProps) {
               onValidationErrors={onValidationErrors}
             />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={11} sm={12}>
             <CostCardGroup
               costPrice={sales.costPrice}
               fixedCosts={sales.costs.fixCosts}
@@ -160,7 +151,7 @@ export default function SalesForm(props: SalesFormProps) {
               currency={sales.currency}
             />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={11} sm={12}>
             <ProfitCardGroup
               breakEven={sales.breakEven}
               revenue={sales.revenue}
@@ -169,7 +160,7 @@ export default function SalesForm(props: SalesFormProps) {
               currency={sales.currency}
             />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={11} sm={12}>
             <CostPerformanceBarChart
               totalCosts={
                 sumCosts(sales.costs.fixCosts) +
@@ -182,10 +173,10 @@ export default function SalesForm(props: SalesFormProps) {
               currency={sales.currency}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={11} sm={12}>
             <Divider />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={11} sm={12}>
             <DetailedCostStatement
               costs={sales.costs}
               discount={sales.discount}
