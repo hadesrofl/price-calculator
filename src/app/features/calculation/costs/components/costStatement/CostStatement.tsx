@@ -39,7 +39,7 @@ export default function CostStatement(props: CostStatementProps) {
         />
       </Grid>
 
-      <Grid item xs={12} md={6} alignSelf="center">
+      <Grid item xs={12} md={6} className="self-center">
         <Grid item xs={12}>
           <Typography variant="h6">{title}</Typography>
         </Grid>
