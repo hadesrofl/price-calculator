@@ -1,5 +1,5 @@
 import ColoredCard from "@/app/components/coloredCard/coloredCard";
-import { Grid, Stack, useTheme } from "@mui/material";
+import { Grid, useTheme } from "@mui/material";
 import NumberInput from "../inputs/NumberInput";
 import {
   SalesValidationErrors,
@@ -13,10 +13,7 @@ import { Discount, calculateCostPerUnit } from "../../types/Discount";
 import ButtonWithTooltip from "../buttons/ButtonWithTooltip";
 import Info from "@mui/icons-material/Info";
 import { useTranslation } from "@/app/i18n/i18next";
-import {
-  TranslationsInputCardGroup,
-  TranslationsSalesForm,
-} from "@/app/i18n/locales/translationNamespaces";
+import { TranslationsInputCardGroup } from "@/app/i18n/locales/translationNamespaces";
 
 type InputCardGroupProps = {
   initialSalesVolume: number;
@@ -95,7 +92,7 @@ export default function InputCardGroup(props: InputCardGroupProps) {
   ]);
 
   return (
-    <Grid alignItems="center" container rowSpacing={2} columnSpacing={4}>
+    <Grid className="items-center" container rowSpacing={2} columnSpacing={4}>
       <Grid item xs={12} sm={4}>
         <ColoredCard color={inputCardColor} title={t("Labels.SalesVolume")}>
           <NumberInput
