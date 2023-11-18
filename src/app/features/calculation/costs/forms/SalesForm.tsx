@@ -122,7 +122,12 @@ export default function SalesForm(props: SalesFormProps) {
         <Typography variant="h5">{t("Title")}</Typography>
       )}
       <Stack direction={isDesktopSize ? "row" : "column"}>
-        <Grid className="items-center" container spacing={3}>
+        <Grid
+          className="items-stretch"
+          container
+          rowSpacing={2}
+          columnSpacing={4}
+        >
           <Grid item xs={11} sm={12}>
             <InputCardGroup
               initialSalesVolume={sales.volume}
@@ -135,7 +140,7 @@ export default function SalesForm(props: SalesFormProps) {
               onValidationErrors={onValidationErrors}
             />
           </Grid>
-          <Grid item xs={11} sm={12}>
+          <Grid item xs={11} sm={12} lg={6}>
             <CostCardGroup
               costPrice={sales.costPrice}
               fixedCosts={sales.costs.fixCosts}
@@ -151,7 +156,7 @@ export default function SalesForm(props: SalesFormProps) {
               currency={sales.currency}
             />
           </Grid>
-          <Grid item xs={11} sm={12}>
+          <Grid item xs={11} sm={12} lg={6}>
             <ProfitCardGroup
               breakEven={sales.breakEven}
               revenue={sales.revenue}

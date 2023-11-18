@@ -27,12 +27,12 @@ export default function CostCardGroup(props: CostCardGroupProps) {
   return (
     <ColoredAccordion title={t("Title")} titleColor={titleColor}>
       <Grid
-        className="items-center mt-1"
+        className="items-stretch mt-1"
         container
         rowSpacing={2}
         columnSpacing={4}
       >
-        <Grid item xs={12} sm={6} lg={3}>
+        <Grid item xs={12} sm={6}>
           <ColoredCard color={costCardColor} title={t("Labels.TotalCosts")}>
             <NumberInput
               customAdornmentText={currency}
@@ -42,7 +42,7 @@ export default function CostCardGroup(props: CostCardGroupProps) {
             />
           </ColoredCard>
         </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
+        <Grid item xs={12} sm={6}>
           <ColoredCard color={costCardColor} title={t("Labels.OwnCosts")}>
             <ButtonWithTooltip disabled tooltipText={t("Tooltips.OwnCosts")}>
               <Info color="primary" />
@@ -55,7 +55,7 @@ export default function CostCardGroup(props: CostCardGroupProps) {
             />
           </ColoredCard>
         </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
+        <Grid item xs={12} sm={6}>
           <ColoredCard color={costCardColor} title={t("Labels.FixedCosts")}>
             <NumberInput
               customAdornmentText={currency}
@@ -65,7 +65,7 @@ export default function CostCardGroup(props: CostCardGroupProps) {
             />
           </ColoredCard>
         </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
+        <Grid item xs={12} sm={6}>
           <ColoredCard color={costCardColor} title={t("Labels.VariableCosts")}>
             <NumberInput
               customAdornmentText={currency}
