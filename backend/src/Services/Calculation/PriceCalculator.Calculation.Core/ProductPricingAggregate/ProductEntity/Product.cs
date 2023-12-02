@@ -14,9 +14,9 @@ public class Product : EntityBase
   public Product()
   {
     Name = string.Empty;
-    Category = new ();
+    Category = new();
   }
-  
+
   /// <summary>
   ///   Constructor
   /// </summary>
@@ -37,4 +37,17 @@ public class Product : EntityBase
   ///   Is the category this product belongs to
   /// </summary>
   public ProductCategory Category { get; private set; }
+
+  public Product Update(Product updatedProduct)
+  {
+    return new Product
+    {
+      Id = Id,
+      Name = updatedProduct.Name,
+      Category = new ProductCategory(updatedProduct.Category.Name)
+      {
+        Id = Category.Id,
+      }
+    };
+  }
 }

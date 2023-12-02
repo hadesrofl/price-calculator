@@ -21,6 +21,7 @@
         <PackageReference Include="FastEndpoints.ApiExplorer"/>
         <PackageReference Include="FastEndpoints.Swagger"/>
         <PackageReference Include="FastEndpoints.Swagger.Swashbuckle"/>
+        <PackageReference Include="ISO.4217.CurrencyCodes" />
         <PackageReference Include="MediatR"/>
         <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" PrivateAssets="all"/>

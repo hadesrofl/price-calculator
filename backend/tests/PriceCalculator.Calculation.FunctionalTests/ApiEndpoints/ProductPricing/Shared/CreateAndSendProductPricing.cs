@@ -23,21 +23,21 @@ public static class CreateAndSendProductPricing
     response?.ProductPricing.Calculation.Should().NotBeNull();
     return response?.ProductPricing;
   }
-  
+
   public static async Task<List<ProductPricingRecord>> SendCreateAndReturnResponse(HttpClient client, IMapper mapper, int numberToGenerate)
   {
     var productPricings = new ProductPricingFaker().Generate(numberToGenerate);
     var productPricingsRecords = new List<ProductPricingRecord>();
     foreach (var productPricing in productPricings)
     {
-      var record = await CreateAndSendProductPricing.SendCreateAndReturnResponse(client,
+      var record = await SendCreateAndReturnResponse(client,
         new CreateProductPricingRequest
         {
           ProductPricing = mapper
             .Map<ProductPricingRecord>(mapper
               .Map<ProductPricingDto>(productPricing))
         });
-      
+
       if (record != null) productPricingsRecords.Add(record);
     }
 

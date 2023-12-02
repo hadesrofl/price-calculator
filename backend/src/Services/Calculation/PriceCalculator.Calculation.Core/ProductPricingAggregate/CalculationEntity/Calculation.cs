@@ -99,6 +99,22 @@ public class Calculation : EntityBase
     CalculateDiscounts();
   }
 
+  /// <summary>
+  /// Updates the calculation by using values of a given updated calculation object
+  /// </summary>
+  /// <param name="updatedCalculation">Is the object with the new values</param>
+  /// <returns>An updated version of the calculation entity</returns>
+  public Calculation Update(Calculation updatedCalculation)
+  {
+    var newCalculation = new Calculation(updatedCalculation.SalesVolume, updatedCalculation.PricePerUnit)
+    {
+      Id = Id
+    };
+    newCalculation.AddCosts(updatedCalculation.Costs);
+    _ = newCalculation.CostPerformanceCalculation; // used to calculate cost performance after creation
+    return newCalculation;
+  }
+
   private void CalculateDiscounts()
   {
     _costs.ForEach(c => c.ApplyDiscountAndUpdateValue(PricePerUnit));

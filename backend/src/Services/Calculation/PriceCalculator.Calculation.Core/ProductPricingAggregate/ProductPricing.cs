@@ -14,7 +14,7 @@ public class ProductPricing : EntityBase, IAggregateRoot
   /// Is the product this pricing relates to
   /// </summary>
   public Product Product { get; private set; }
-  
+
   /// <summary>
   /// Is the price calculation
   /// </summary>
@@ -25,7 +25,7 @@ public class ProductPricing : EntityBase, IAggregateRoot
     Product = new Product(string.Empty, new ProductCategory());
     Calculation = new CalculationEntity.Calculation(0, new Amount());
   }
-  
+
   /// <summary>
   /// Constructor
   /// </summary>
@@ -35,5 +35,15 @@ public class ProductPricing : EntityBase, IAggregateRoot
   {
     Product = product;
     Calculation = calculation;
+  }
+
+  /// <summary>
+  /// Updates the Product Pricing with the values of a given <see cref="ProductPricing"/>
+  /// </summary>
+  /// <param name="updatedProductPricing">Is the product pricing with updated values</param>
+  public void Update(ProductPricing updatedProductPricing)
+  {
+    Product = Product.Update(updatedProductPricing.Product);
+    Calculation = Calculation.Update(updatedProductPricing.Calculation);
   }
 }
