@@ -7,5 +7,5 @@ public class CreateProductPricingRequest
 {
   public const string Route = "/ProductPricing";
 
-  [Required] public ProductPricingRecord? ProductPricing { get; init; }
+  [Required] public ProductPricingRecord ProductPricing { get; init; } = ProductPricingRecord.CreateEmptyProductPricingRecord();
 }

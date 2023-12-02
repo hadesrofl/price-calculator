@@ -1,5 +1,4 @@
-﻿using Ardalis.SharedKernel;
-using FastEndpoints;
+﻿using FastEndpoints;
 using MediatR;
 using PriceCalculator.Calculation.API.ProductPricing.Records;
 using PriceCalculator.Calculation.UseCases.ProductPricing.Create;
@@ -10,14 +9,11 @@ namespace PriceCalculator.Calculation.API.ProductPricing.Create;
 
 public class CreateProductPricing : Endpoint<CreateProductPricingRequest, CreateProductPricingResponse>
 {
-  private readonly IRepository<Core.ProductPricingAggregate.ProductPricing> _repository;
   private readonly IMediator _mediator;
   private readonly IMapper _mapper;
 
-  public CreateProductPricing(IRepository<Core.ProductPricingAggregate.ProductPricing> repository,
-    IMediator mediator, IMapper mapper)
+  public CreateProductPricing(IMediator mediator, IMapper mapper)
   {
-    _repository = repository;
     _mediator = mediator;
     _mapper = mapper;
   }
@@ -44,8 +40,9 @@ public class CreateProductPricing : Endpoint<CreateProductPricingRequest, Create
 
     if (result.IsSuccess)
     {
-      await this.SendAsync(new CreateProductPricingResponse(_mapper.Map<ProductPricingRecord>(result.Value)), 201, cancellationToken);
+      await this.SendAsync(new CreateProductPricingResponse(_mapper.Map<ProductPricingRecord>(result.Value)), StatusCodes.Status201Created, cancellationToken);
     }
-    // TODO: Handle other cases as necessary
+    else
+      await this.SendAsync(new CreateProductPricingResponse(ProductPricingRecord.CreateEmptyProductPricingRecord()), StatusCodes.Status500InternalServerError);
   }
 }
