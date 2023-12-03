@@ -19,7 +19,7 @@ public class AppDbContext : DbContext
 
     public DbSet<Contributor> Contributors => Set<Contributor>();
     
-    // public DbSet<ProductPricing> ProductPricings => Set<ProductPricing>();
+    public DbSet<ProductPricing> ProductPricings => Set<ProductPricing>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

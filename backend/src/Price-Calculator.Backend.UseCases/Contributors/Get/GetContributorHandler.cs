@@ -20,6 +20,7 @@ public class GetContributorHandler : IQueryHandler<GetContributorQuery, Result<C
     public async Task<Result<ContributorDTO>> Handle(GetContributorQuery request, CancellationToken cancellationToken)
     {
         var spec = new ContributorByIdSpec(request.ContributorId);
+        
         var entity = await _repository.FirstOrDefaultAsync(spec, cancellationToken);
         if (entity == null) return Result.NotFound();
 

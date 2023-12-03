@@ -13,6 +13,7 @@ using MediatR;
 using MediatR.Pipeline;
 using Price_Calculator.Backend.Core.ProductPricingAggregate;
 using Price_Calculator.Backend.UseCases.ProductPricing.Create;
+using Price_Calculator.Backend.UseCases.ProductPricing.List;
 using Module = Autofac.Module;
 
 namespace Price_Calculator.Backend.Infrastructure;
@@ -80,6 +81,9 @@ public class AutofacInfrastructureModule : Module
 
     private void RegisterQueries(ContainerBuilder builder)
     {
+      builder.RegisterType<ListProductPricingsQueryService>()
+        .As<IListProductPricingsQueryService>()
+        .InstancePerLifetimeScope();
     }
 
     private void RegisterAutoMapper(ContainerBuilder builder) => 

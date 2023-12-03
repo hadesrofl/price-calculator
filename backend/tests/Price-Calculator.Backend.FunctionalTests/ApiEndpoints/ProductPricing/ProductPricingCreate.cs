@@ -1,6 +1,4 @@
-﻿using System.Net;
-using System.Net.Http.Json;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Price_Calculator.Backend.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 using Price_Calculator.Backend.Web;
 using Price_Calculator.Backend.Web.ProductPricing.Create;
@@ -39,7 +37,7 @@ public class ProductPricingCreate : IClassFixture<CustomWebApplicationFactory<Pr
         }
       }
     };
-    var productPricing = await SendCreateAndReturnResponse(_client, request);
+    var productPricing = await CreateAndSendProductPricing.SendCreateAndReturnResponse(_client, request);
 
     productPricing?.Product?.Name.Should().Be(request.ProductPricing.Product.Name);
     productPricing?.Product?.Category.Should().Be(request.ProductPricing.Product.Category);
@@ -48,18 +46,5 @@ public class ProductPricingCreate : IClassFixture<CustomWebApplicationFactory<Pr
     productPricing?.Calculation?.SalesVolume.Should().Be(request.ProductPricing.Calculation.SalesVolume);
     productPricing?.Calculation?.PricePerUnit.Should().Be(request.ProductPricing.Calculation.PricePerUnit);
     productPricing?.Calculation?.CostPerformanceCalculation.Should().NotBeNull();
-  }
-
-  public static async Task<ProductPricingRecord?> SendCreateAndReturnResponse(HttpClient client, CreateProductPricingRequest request)
-  {
-    var result = await client.PostAsJsonAsync(CreateProductPricingRequest.Route, request);
-    result.Should().NotBeNull();
-    result.StatusCode.Should().Be(HttpStatusCode.Created);
-    var response = await result.Content.ReadFromJsonAsync<CreateProductPricingResponse>();
-    response.Should().NotBeNull();
-    response?.ProductPricing.Should().NotBeNull();
-    response?.ProductPricing.Product.Should().NotBeNull();
-    response?.ProductPricing.Calculation.Should().NotBeNull();
-    return response?.ProductPricing;
   }
 }
