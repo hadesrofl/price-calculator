@@ -16,6 +16,8 @@
         <PackageReference Include="Ardalis.Specification"/>
         <PackageReference Include="Autofac"/>
         <PackageReference Include="AutoMapper" />
+        <PackageReference Include="ISO.4217.CurrencyCodes" />
+        <PackageReference Include="FluentValidation" />
         <PackageReference Include="MediatR"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>

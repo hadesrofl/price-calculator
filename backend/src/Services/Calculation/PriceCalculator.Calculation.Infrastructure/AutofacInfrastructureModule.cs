@@ -6,6 +6,7 @@ using MediatR;
 using MediatR.Pipeline;
 using PriceCalculator.Calculation.Core.Interfaces;
 using PriceCalculator.Calculation.Core.ProductPricingAggregate;
+using PriceCalculator.Calculation.Core.ProductPricingAggregate.CalculationEntity.Services;
 using PriceCalculator.Calculation.Infrastructure.Data;
 using PriceCalculator.Calculation.Infrastructure.Data.Queries;
 using PriceCalculator.Calculation.Infrastructure.Email;
@@ -79,12 +80,16 @@ public class AutofacInfrastructureModule : Module
 
     private void RegisterQueries(ContainerBuilder builder)
     {
-      builder.RegisterType<ListProductPricingsQueryService>()
-        .As<IListProductPricingsQueryService>()
-        .InstancePerLifetimeScope();
+        builder.RegisterType<ListProductPricingsQueryService>()
+          .As<IListProductPricingsQueryService>()
+          .InstancePerLifetimeScope();
+
+        builder.RegisterType<ListCurrenciesQueryService>()
+          .As<IListCurrenciesQueryService>()
+          .InstancePerLifetimeScope();
     }
 
-    private void RegisterAutoMapper(ContainerBuilder builder) => 
+    private void RegisterAutoMapper(ContainerBuilder builder) =>
       builder.RegisterAutoMapper(true, _assemblies.ToArray());
 
     private void RegisterMediatR(ContainerBuilder builder)

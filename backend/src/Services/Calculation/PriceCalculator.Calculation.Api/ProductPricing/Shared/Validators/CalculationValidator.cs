@@ -1,5 +1,6 @@
 using FluentValidation;
 using PriceCalculator.Calculation.API.ProductPricing.Records;
+using PriceCalculator.Calculation.Core.ProductPricingAggregate.Validators;
 
 namespace PriceCalculator.Calculation.API.ProductPricing.Shared.Validators;
 

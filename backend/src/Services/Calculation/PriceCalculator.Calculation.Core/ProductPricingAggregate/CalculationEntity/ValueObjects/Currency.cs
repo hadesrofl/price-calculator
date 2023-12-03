@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using PriceCalculator.Calculation.Core.ProductPricingAggregate.Validators;
 
 namespace PriceCalculator.Calculation.Core.ProductPricingAggregate.CalculationEntity.ValueObjects;
 
@@ -8,27 +10,37 @@ namespace PriceCalculator.Calculation.Core.ProductPricingAggregate.CalculationEn
 [Owned]
 public record Currency
 {
+  private string _name = string.Empty;
+
   /// <summary>
   ///   Empty constructor for EFCore
   /// </summary>
   public Currency()
   {
-    
+
   }
-  
+
   /// <summary>
   ///   Constructor
   /// </summary>
-  /// <param name="name">Is the name of the currency in English</param>
+  /// <param name="name">Is the name of the currency as ISO 4217 code</param>
   public Currency(string name)
   {
     Name = name;
   }
 
   /// <summary>
-  ///   Is the name of the currency in English
+  ///   Is the name of the currency as ISO 4217 code
   /// </summary>
-  public string Name { get; init; } = string.Empty;
+  public string Name
+  {
+    get => _name;
+    init
+    {
+      Validate(value);
+      _name = value;
+    }
+  }
 
   /// <inheritdoc />
   public virtual bool Equals(Currency? other)
@@ -41,4 +53,6 @@ public record Currency
   {
     return HashCode.Combine(Name);
   }
+
+  private static void Validate(string name) => new CurrencyValidator().ValidateAndThrow(name);
 }
