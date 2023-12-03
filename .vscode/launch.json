@@ -23,6 +23,13 @@
                 "uriFormat": "%s",
                 "action": "debugWithChrome"
             }
+        },
+        {
+            "name": "C#: PriceCalculator.Calculation.Api",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/backend/src/Services/Calculation/PriceCalculator.Calculation.Api/PriceCalculator.Calculation.Api.csproj",
+            "launchConfigurationId": "TargetFramework=;Price_Calculator.Backend.Web"
         }
     ]
 }

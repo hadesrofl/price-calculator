@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Sdk Name="Microsoft.Build.CentralPackageVersions" Version="2.1.3"/>
+
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AssemblyName>PriceCalculator.Calculation.Infrastructure</AssemblyName>
+        <RootNamespace>PriceCalculator.Calculation.Infrastructure</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Ardalis.SharedKernel"/>
+        <PackageReference Include="Ardalis.Specification.EntityFrameworkCore"/>
+        <PackageReference Include="Autofac"/>
+        <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
+        <PackageReference Include="AutoMapper" />
+        <PackageReference Include="AutoMapper.Contrib.Autofac.DependencyInjection" />
+        <PackageReference Include="ISO.4217.CurrencyCodes" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" PrivateAssets="all"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
+        <PackageReference Include="SQLite"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PriceCalculator.Calculation.Core\PriceCalculator.Calculation.Core.csproj" />
+      <ProjectReference Include="..\PriceCalculator.Calculation.UseCases\PriceCalculator.Calculation.UseCases.csproj" />
+    </ItemGroup>
+  
+</Project>
