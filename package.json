@@ -16,7 +16,7 @@
     "@mui/material": "^5.14.18",
     "@mui/x-charts": "^6.18.1",
     "flag-icons": "^7.0.0",
-    "i18next": "^23.7.3",
+    "i18next": "^23.8.0",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-resources-to-backend": "^1.1.4",
     "joi": "^17.11.0",
